@@ -5,4 +5,4 @@
 
 [node name="SoloLevel" type="Node"]
 script = ExtResource("1_qp3jm")
-pipe = ExtResource("2_fmd4i")
+pipe_scene = ExtResource("2_fmd4i")
