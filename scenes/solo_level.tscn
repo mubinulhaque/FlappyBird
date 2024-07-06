@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbnk0strplsql"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_qp3jm"]
+[ext_resource type="PackedScene" uid="uid://duuxnkk2m4afr" path="res://scenes/pipe.tscn" id="2_fmd4i"]
+
+[node name="SoloLevel" type="Node"]
+script = ExtResource("1_qp3jm")
+pipe = ExtResource("2_fmd4i")

@@ -1,3 +1,4 @@
+# Class for the bird, a player-controlled entity that can only jump and fall
 extends CharacterBody2D
 
 const GRAVITY := 9.8
@@ -10,6 +11,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("player_jump"):
+	if event.is_action_pressed("player_jump"):
 		print("Player jumped!")
 		velocity.y = -JUMP_STRENGTH

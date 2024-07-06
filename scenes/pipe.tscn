@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://duuxnkk2m4afr"]
+
+[ext_resource type="Script" path="res://scripts/pipe.gd" id="1_g61uo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fskj2"]
+size = Vector2(128, 1024)
+
+[node name="Pipe" type="Area2D"]
+monitoring = false
+script = ExtResource("1_g61uo")
+
+[node name="TopPipe" type="CollisionShape2D" parent="."]
+position = Vector2(0, -640)
+shape = SubResource("RectangleShape2D_fskj2")
+
+[node name="BottomPipe" type="CollisionShape2D" parent="."]
+position = Vector2(0, 640)
+shape = SubResource("RectangleShape2D_fskj2")
