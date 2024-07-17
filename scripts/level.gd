@@ -1,3 +1,4 @@
+# Class used for the level to handle obstacle generation
 extends Node
 
 const PIPE_SPEED := 500
@@ -9,12 +10,6 @@ var _pipe_spawn := 1280 ## X position where pipes are supposed to spawn
 @onready var pipes: Array[Pipe]
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	_spawn_pipe(150)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	for pipe in pipes:
 		pipe.position.x -= PIPE_SPEED * delta
@@ -40,3 +35,7 @@ func _spawn_pipe(height: int) -> void:
 	else:
 		# If a pipe class has not been specified
 		printerr("Pipe scene not specified!")
+
+
+func _on_pipe_creation_timer_timeout() -> void:
+	_spawn_pipe(randi() % 700)
