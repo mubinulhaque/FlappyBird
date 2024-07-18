@@ -3,21 +3,21 @@
 [ext_resource type="Script" path="res://scripts/pipe.gd" id="1_g61uo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fskj2"]
-size = Vector2(128, 1024)
+size = Vector2(32, 128)
 
 [node name="Pipe" type="Area2D"]
 monitoring = false
 script = ExtResource("1_g61uo")
 
 [node name="TopPipe" type="CollisionShape2D" parent="."]
-position = Vector2(0, -640)
+position = Vector2(0, -90)
 shape = SubResource("RectangleShape2D_fskj2")
 
 [node name="BottomPipe" type="CollisionShape2D" parent="."]
-position = Vector2(0, 640)
+position = Vector2(0, 90)
 shape = SubResource("RectangleShape2D_fskj2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-rect = Rect2(-64, -128, 128, 256)
+rect = Rect2(-16, -26, 32, 52)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]

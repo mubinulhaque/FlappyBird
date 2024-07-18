@@ -1,8 +1,8 @@
 # Class for the bird, a player-controlled entity that can only jump and fall
 extends CharacterBody2D
 
-const GRAVITY := 980
-const JUMP_STRENGTH := 650
+const GRAVITY := 196
+const JUMP_STRENGTH := 100
 
 
 func _physics_process(delta: float) -> void:

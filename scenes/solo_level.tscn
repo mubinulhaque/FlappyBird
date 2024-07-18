@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbnk0strplsql"]
+[gd_scene load_steps=4 format=3 uid="uid://bbnk0strplsql"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_qp3jm"]
 [ext_resource type="PackedScene" uid="uid://duuxnkk2m4afr" path="res://scenes/pipe.tscn" id="2_fmd4i"]
+[ext_resource type="PackedScene" uid="uid://bj34n2q7jwf6d" path="res://scenes/player.tscn" id="3_ipcns"]
 
 [node name="SoloLevel" type="Node"]
 script = ExtResource("1_qp3jm")
@@ -9,5 +10,7 @@ pipe_scene = ExtResource("2_fmd4i")
 
 [node name="PipeCreationTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="Player" parent="." instance=ExtResource("3_ipcns")]
 
 [connection signal="timeout" from="PipeCreationTimer" to="." method="_on_pipe_creation_timer_timeout"]
