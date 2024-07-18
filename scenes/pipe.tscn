@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://duuxnkk2m4afr"]
+[gd_scene load_steps=4 format=3 uid="uid://duuxnkk2m4afr"]
 
 [ext_resource type="Script" path="res://scripts/pipe.gd" id="1_g61uo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fskj2"]
 size = Vector2(32, 128)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wapl0"]
+radius = 15.0
 
 [node name="Pipe" type="Area2D"]
 collision_layer = 0
@@ -21,4 +24,10 @@ shape = SubResource("RectangleShape2D_fskj2")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-16, -26, 32, 52)
 
+[node name="Gap" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gap"]
+shape = SubResource("CircleShape2D_wapl0")
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]
+[connection signal="body_entered" from="Gap" to="." method="_on_gap_entered"]

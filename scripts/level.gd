@@ -54,6 +54,7 @@ func _spawn_pipe(height: int) -> void:
 				new_pipe.position.x = _pipe_spawn
 				new_pipe.screen_exited.connect(_on_pipe_not_visible.bind(new_pipe))
 				new_pipe.body_entered.connect(_on_player_entered_pipe)
+				new_pipe.gap_entered.connect(_on_player_entered_gap)
 				
 				_pipes.append(new_pipe)
 				new_pipe.name = "Pipe " + str(_pipes.size())
@@ -97,3 +98,8 @@ func _on_player_entered_pipe(body: Node2D):
 		var player: Player = body
 		player.die()
 		get_tree().paused = true
+
+
+# Increments a player's score
+func _on_player_entered_gap(player: Player):
+	player.increment_score()
