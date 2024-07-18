@@ -6,7 +6,7 @@
 size = Vector2(32, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wapl0"]
-radius = 15.0
+radius = 20.0
 
 [node name="Pipe" type="Area2D"]
 collision_layer = 0
@@ -25,6 +25,7 @@ shape = SubResource("RectangleShape2D_fskj2")
 rect = Rect2(-16, -26, 32, 52)
 
 [node name="Gap" type="Area2D" parent="."]
+position = Vector2(32, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gap"]
 shape = SubResource("CircleShape2D_wapl0")

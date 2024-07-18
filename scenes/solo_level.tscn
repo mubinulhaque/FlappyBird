@@ -14,4 +14,33 @@ autostart = true
 [node name="Player" parent="." instance=ExtResource("3_ipcns")]
 position = Vector2(16, 15)
 
+[node name="ScoreTextLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 8
+text = "Score"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="ScoreNumberLabel" type="Label" parent="ScoreTextLabel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 33.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+text = "0
+"
+horizontal_alignment = 1
+
 [connection signal="timeout" from="PipeCreationTimer" to="." method="_on_pipe_creation_timer_timeout"]

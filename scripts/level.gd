@@ -12,6 +12,7 @@ var _max_pipe_height := 700 ## Maximum height that a pipe can be at
 
 @onready var _pipes: Array[Pipe]
 @onready var _pipe_creation_timer: Timer = $PipeCreationTimer
+@onready var _score_label: Label = %ScoreNumberLabel
 
 
 func _ready() -> void:
@@ -102,4 +103,4 @@ func _on_player_entered_pipe(body: Node2D):
 
 # Increments a player's score
 func _on_player_entered_gap(player: Player):
-	player.increment_score()
+	_score_label.text = str(player.increment_score())

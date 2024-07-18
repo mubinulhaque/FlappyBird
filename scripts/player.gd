@@ -28,6 +28,6 @@ func die() -> void:
 	_alive = false
 
 
-func increment_score() -> void:
+func increment_score() -> int:
 	_score += 1
-	print("Score: " + str(_score))
+	return _score
