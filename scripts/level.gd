@@ -53,6 +53,7 @@ func _spawn_pipe(height: int) -> void:
 				new_pipe.change_height(height)
 				new_pipe.position.x = _pipe_spawn
 				new_pipe.screen_exited.connect(_on_pipe_not_visible.bind(new_pipe))
+				new_pipe.body_entered.connect(_on_player_entered_pipe)
 				
 				_pipes.append(new_pipe)
 				new_pipe.name = "Pipe " + str(_pipes.size())
@@ -88,3 +89,11 @@ func _on_pipe_not_visible(old_pipe: Pipe) -> void:
 # Spawns a pipe after a set amount of time
 func _on_pipe_creation_timer_timeout() -> void:
 	_spawn_pipe(_get_random_pipe_height())
+
+
+# Kills a player when they hit a pipe
+func _on_player_entered_pipe(body: Node2D):
+	if body is Player:
+		var player: Player = body
+		player.die()
+		get_tree().paused = true

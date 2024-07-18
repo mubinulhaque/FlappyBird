@@ -6,7 +6,8 @@
 size = Vector2(32, 128)
 
 [node name="Pipe" type="Area2D"]
-monitoring = false
+collision_layer = 0
+monitorable = false
 script = ExtResource("1_g61uo")
 
 [node name="TopPipe" type="CollisionShape2D" parent="."]

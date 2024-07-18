@@ -12,5 +12,6 @@ pipe_scene = ExtResource("2_fmd4i")
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("3_ipcns")]
+position = Vector2(16, 15)
 
 [connection signal="timeout" from="PipeCreationTimer" to="." method="_on_pipe_creation_timer_timeout"]
