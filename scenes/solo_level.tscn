@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbnk0strplsql"]
+[gd_scene load_steps=7 format=3 uid="uid://bbnk0strplsql"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_qp3jm"]
 [ext_resource type="PackedScene" uid="uid://duuxnkk2m4afr" path="res://scenes/pipe.tscn" id="2_fmd4i"]
 [ext_resource type="PackedScene" uid="uid://bj34n2q7jwf6d" path="res://scenes/player.tscn" id="3_ipcns"]
 [ext_resource type="AudioStream" uid="uid://cjuvsiau56soy" path="res://audio/sounds/jump.wav" id="4_cbnj4"]
 [ext_resource type="Script" path="res://scripts/character_audio_player.gd" id="5_gm2m7"]
+[ext_resource type="PackedScene" uid="uid://beovkyl6fn7dd" path="res://scenes/air_bounce.tscn" id="6_50hjp"]
 
 [node name="SoloLevel" type="Node"]
 script = ExtResource("1_qp3jm")
@@ -14,10 +15,10 @@ pipe_scene = ExtResource("2_fmd4i")
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("3_ipcns")]
-position = Vector2(16, 15)
+position = Vector2(32, 32)
 
 [node name="ScoreTextLabel" type="Label" parent="."]
-z_index = 1
+z_index = 10
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -34,6 +35,7 @@ uppercase = true
 
 [node name="ScoreNumberLabel" type="Label" parent="ScoreTextLabel"]
 unique_name_in_owner = true
+z_index = 10
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -54,6 +56,12 @@ horizontal_alignment = 1
 process_mode = 3
 stream = ExtResource("4_cbnj4")
 script = ExtResource("5_gm2m7")
+
+[node name="AirBounce" parent="." instance=ExtResource("6_50hjp")]
+visible = false
+
+[node name="AirBounce2" parent="." instance=ExtResource("6_50hjp")]
+visible = false
 
 [connection signal="timeout" from="PipeCreationTimer" to="." method="_on_pipe_creation_timer_timeout"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]

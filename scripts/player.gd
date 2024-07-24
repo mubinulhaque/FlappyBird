@@ -2,7 +2,7 @@
 class_name Player
 extends CharacterBody2D
 
-signal jumped
+signal jumped(player_position: Vector2)
 signal died
 
 const GRAVITY := 196
@@ -12,7 +12,6 @@ var _alive := true
 var _score := 0
 
 @onready var sprite: Sprite2D = $Sprite
-
 
 func _physics_process(delta: float) -> void:
 	if _alive:
@@ -26,7 +25,7 @@ func _input(event: InputEvent) -> void:
 		# Set their velocity to the jump strength
 		# And play a sound
 		velocity.y = -JUMP_STRENGTH
-		jumped.emit()
+		jumped.emit(global_position)
 
 
 # Controls the bird's actions when it dies

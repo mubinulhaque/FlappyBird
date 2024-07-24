@@ -9,11 +9,13 @@ const PIPE_GAP := 96 ## Height of the gap between vertically adjacent pipes
 var _pipe_spawn := 1500 ## X position where pipes are supposed to spawn
 var _max_pipe_count := 3 ## Maximum number of pipes that can be onscreen
 var _max_pipe_height := 700 ## Maximum height that a pipe can be at
+var _current_bounce := 0 ## Current index of AirBounce
 
 @onready var _pipes: Array[Pipe]
 @onready var _pipe_creation_timer: Timer = $PipeCreationTimer
 @onready var _score_label: Label = %ScoreNumberLabel
 @onready var _audio_player: CharacterAudioPlayer = $CharacterAudioPlayer
+@onready var _air_bounces: Array[AirBounce] = [$AirBounce, $AirBounce2]
 
 
 func _ready() -> void:
@@ -35,6 +37,10 @@ func _process(delta: float) -> void:
 	# Move the pipes to the left
 	for pipe in _pipes:
 		pipe.position.x -= PIPE_SPEED * delta
+	
+	for bounce in _air_bounces:
+		if bounce.visible:
+			bounce.position.x -= PIPE_SPEED * delta
 
 
 # Spawns a pipe at a specific height
@@ -108,8 +114,12 @@ func _on_player_entered_gap(player: Player) -> void:
 
 
 # Plays a jump sound
-func _on_player_jumped() -> void:
+func _on_player_jumped(player_position: Vector2) -> void:
 	_audio_player.play_sound(_audio_player.JUMP_SOUND)
+	
+	var new_bounce := _air_bounces[_current_bounce]
+	new_bounce.play(player_position)
+	_current_bounce = (_current_bounce + 1) % _air_bounces.size()
 
 
 # Plays a death sound
