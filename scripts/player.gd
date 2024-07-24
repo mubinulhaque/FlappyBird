@@ -3,6 +3,7 @@ class_name Player
 extends CharacterBody2D
 
 signal jumped
+signal died
 
 const GRAVITY := 196
 const JUMP_STRENGTH := 100
@@ -32,6 +33,7 @@ func _input(event: InputEvent) -> void:
 func die() -> void:
 	sprite.modulate = Color.RED
 	_alive = false
+	died.emit()
 
 
 func increment_score() -> int:

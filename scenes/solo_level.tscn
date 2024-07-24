@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbnk0strplsql"]
+[gd_scene load_steps=6 format=3 uid="uid://bbnk0strplsql"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_qp3jm"]
 [ext_resource type="PackedScene" uid="uid://duuxnkk2m4afr" path="res://scenes/pipe.tscn" id="2_fmd4i"]
 [ext_resource type="PackedScene" uid="uid://bj34n2q7jwf6d" path="res://scenes/player.tscn" id="3_ipcns"]
 [ext_resource type="AudioStream" uid="uid://cjuvsiau56soy" path="res://audio/sounds/jump.wav" id="4_cbnj4"]
+[ext_resource type="Script" path="res://scripts/character_audio_player.gd" id="5_gm2m7"]
 
 [node name="SoloLevel" type="Node"]
 script = ExtResource("1_qp3jm")
@@ -44,8 +45,11 @@ text = "0
 "
 horizontal_alignment = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="CharacterAudioPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("4_cbnj4")
+script = ExtResource("5_gm2m7")
 
 [connection signal="timeout" from="PipeCreationTimer" to="." method="_on_pipe_creation_timer_timeout"]
+[connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="jumped" from="Player" to="." method="_on_player_jumped"]

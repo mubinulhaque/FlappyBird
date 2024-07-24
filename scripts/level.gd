@@ -13,7 +13,7 @@ var _max_pipe_height := 700 ## Maximum height that a pipe can be at
 @onready var _pipes: Array[Pipe]
 @onready var _pipe_creation_timer: Timer = $PipeCreationTimer
 @onready var _score_label: Label = %ScoreNumberLabel
-@onready var audio_player = $AudioStreamPlayer
+@onready var _audio_player: CharacterAudioPlayer = $CharacterAudioPlayer
 
 
 func _ready() -> void:
@@ -95,7 +95,7 @@ func _on_pipe_creation_timer_timeout() -> void:
 
 
 # Kills a player when they hit a pipe
-func _on_player_entered_pipe(body: Node2D):
+func _on_player_entered_pipe(body: Node2D) -> void:
 	if body is Player:
 		var player: Player = body
 		player.die()
@@ -103,9 +103,14 @@ func _on_player_entered_pipe(body: Node2D):
 
 
 # Increments a player's score
-func _on_player_entered_gap(player: Player):
+func _on_player_entered_gap(player: Player) -> void:
 	_score_label.text = str(player.increment_score())
 
 
-func _on_player_jumped():
-	audio_player.play()
+# Plays a jump sound
+func _on_player_jumped() -> void:
+	_audio_player.play_sound(_audio_player.JUMP_SOUND)
+
+
+func _on_player_died() -> void:
+	_audio_player.play_sound(_audio_player.DEATH_SOUND)
