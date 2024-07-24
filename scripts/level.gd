@@ -112,5 +112,6 @@ func _on_player_jumped() -> void:
 	_audio_player.play_sound(_audio_player.JUMP_SOUND)
 
 
+# Plays a death sound
 func _on_player_died() -> void:
 	_audio_player.play_sound(_audio_player.DEATH_SOUND)

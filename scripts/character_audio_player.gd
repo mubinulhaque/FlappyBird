@@ -7,5 +7,6 @@ const JUMP_SOUND: AudioStream = preload("res://audio/sounds/jump.wav")
 
 ## Plays a player's death sound
 func play_sound(sound: AudioStream) -> void:
-	stream = sound
-	play()
+	if sound:
+		stream = sound
+		play()
