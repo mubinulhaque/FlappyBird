@@ -2,6 +2,8 @@
 class_name Player
 extends CharacterBody2D
 
+signal jumped
+
 const GRAVITY := 196
 const JUMP_STRENGTH := 100
 
@@ -19,7 +21,11 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if _alive and event.is_action_pressed("player_jump"):
+		# If the player presses the jump button
+		# Set their velocity to the jump strength
+		# And play a sound
 		velocity.y = -JUMP_STRENGTH
+		jumped.emit()
 
 
 # Controls the bird's actions when it dies
