@@ -15,5 +15,5 @@ func play(player_position: Vector2) -> void:
 	visible = true
 
 
-func _on_animation_finished(anim_name: StringName) -> void:
+func _on_animation_finished(_anim_name: StringName) -> void:
 	visible = false

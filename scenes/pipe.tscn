@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dlghtqxatl1fm" path="res://textures/pipe.png" id="2_b4iyo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fskj2"]
-size = Vector2(32, 128)
+size = Vector2(24, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wapl0"]
 radius = 20.0
@@ -19,7 +19,7 @@ position = Vector2(0, 101)
 texture = ExtResource("2_b4iyo")
 
 [node name="TopPipeCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -90)
+position = Vector2(0, -92)
 shape = SubResource("RectangleShape2D_fskj2")
 
 [node name="BottomPipeSprite" type="Sprite2D" parent="."]
@@ -28,7 +28,7 @@ texture = ExtResource("2_b4iyo")
 flip_v = true
 
 [node name="BottomPipeCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, 90)
+position = Vector2(0, 92)
 shape = SubResource("RectangleShape2D_fskj2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
