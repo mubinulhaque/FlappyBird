@@ -15,6 +15,11 @@ pipe_scene = ExtResource("2_fmd4i")
 [node name="PipeCreationTimer" type="Timer" parent="."]
 autostart = true
 
+[node name="LevelRestartTimer" type="Timer" parent="."]
+process_mode = 2
+wait_time = 3.0
+one_shot = true
+
 [node name="Player" parent="." instance=ExtResource("3_ipcns")]
 position = Vector2(32, 32)
 
@@ -110,5 +115,6 @@ visible = false
 script = ExtResource("7_3t7sb")
 
 [connection signal="timeout" from="PipeCreationTimer" to="." method="_on_pipe_creation_timer_timeout"]
+[connection signal="timeout" from="LevelRestartTimer" to="." method="_on_level_restart_timer_timeout"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="jumped" from="Player" to="." method="_on_player_jumped"]

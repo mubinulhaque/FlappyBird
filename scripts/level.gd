@@ -20,6 +20,7 @@ var _current_high_score := 0 ## Current high score of the player
 @onready var _air_bounces: Array[AirBounce] = [$AirBounce, $AirBounce2]
 @onready var _save_manager: SaveManager = $SaveManager
 @onready var _high_score_label: Label = %HiScoreNumberLabel
+@onready var _level_restart_timer: Timer = $LevelRestartTimer
 
 
 func _ready() -> void:
@@ -135,3 +136,10 @@ func _on_player_died() -> void:
 	
 	if _current_score > _current_high_score:
 		_save_manager.save_high_score(_current_score)
+	
+	_level_restart_timer.start()
+
+
+func _on_level_restart_timer_timeout() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()
