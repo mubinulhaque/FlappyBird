@@ -105,7 +105,6 @@ func _on_player_entered_pipe(body: Node2D) -> void:
 	if body is Player:
 		var player: Player = body
 		player.die()
-		get_tree().paused = true
 
 
 # Increments a player's score

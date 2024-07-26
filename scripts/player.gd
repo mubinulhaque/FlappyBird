@@ -32,9 +32,15 @@ func _input(event: InputEvent) -> void:
 func die() -> void:
 	sprite.modulate = Color.RED
 	_alive = false
+	get_tree().paused = true
 	died.emit()
 
 
 func increment_score() -> int:
 	_score += 1
 	return _score
+
+
+## Kills the player as soon as they exit the screen
+func _on_screen_exited() -> void:
+	die()
