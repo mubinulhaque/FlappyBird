@@ -19,7 +19,7 @@ position = Vector2(0, 101)
 texture = ExtResource("2_b4iyo")
 
 [node name="TopPipeCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -92)
+position = Vector2(0, -94)
 shape = SubResource("RectangleShape2D_fskj2")
 
 [node name="BottomPipeSprite" type="Sprite2D" parent="."]
@@ -28,7 +28,7 @@ texture = ExtResource("2_b4iyo")
 flip_v = true
 
 [node name="BottomPipeCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, 92)
+position = Vector2(0, 94)
 shape = SubResource("RectangleShape2D_fskj2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
