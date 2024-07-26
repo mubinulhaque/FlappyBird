@@ -1,3 +1,4 @@
+## Class used for the effect left below a player when they jump
 class_name AirBounce
 extends Sprite2D
 

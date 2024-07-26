@@ -1,3 +1,4 @@
+## Class used for the main menu
 extends Control
 
 const _SOLO_GAME := preload("res://scenes/solo_level.tscn")

@@ -1,3 +1,4 @@
+## Class used for saving high scores
 class_name SaveManager
 extends Node
 

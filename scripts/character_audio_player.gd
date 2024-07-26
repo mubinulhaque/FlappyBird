@@ -1,3 +1,4 @@
+## Class used for playing general audio
 class_name CharacterAudioPlayer
 extends AudioStreamPlayer
 
