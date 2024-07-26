@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbnk0strplsql"]
+[gd_scene load_steps=8 format=3 uid="uid://bbnk0strplsql"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_qp3jm"]
 [ext_resource type="PackedScene" uid="uid://duuxnkk2m4afr" path="res://scenes/pipe.tscn" id="2_fmd4i"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cjuvsiau56soy" path="res://audio/sounds/jump.wav" id="4_cbnj4"]
 [ext_resource type="Script" path="res://scripts/character_audio_player.gd" id="5_gm2m7"]
 [ext_resource type="PackedScene" uid="uid://beovkyl6fn7dd" path="res://scenes/air_bounce.tscn" id="6_50hjp"]
+[ext_resource type="Script" path="res://scripts/save_manager.gd" id="7_3t7sb"]
 
 [node name="SoloLevel" type="Node"]
 script = ExtResource("1_qp3jm")
@@ -52,6 +53,48 @@ text = "0
 "
 horizontal_alignment = 1
 
+[node name="HiScoreTextLabel" type="Label" parent="."]
+z_index = 10
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 8
+text = "High Score"
+horizontal_alignment = 1
+vertical_alignment = 2
+uppercase = true
+
+[node name="HiScoreNumberLabel" type="Label" parent="HiScoreTextLabel"]
+unique_name_in_owner = true
+z_index = 10
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -21.5
+offset_right = 20.0
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 16
+text = "0
+"
+horizontal_alignment = 1
+
 [node name="CharacterAudioPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("4_cbnj4")
@@ -62,6 +105,9 @@ visible = false
 
 [node name="AirBounce2" parent="." instance=ExtResource("6_50hjp")]
 visible = false
+
+[node name="SaveManager" type="Node" parent="."]
+script = ExtResource("7_3t7sb")
 
 [connection signal="timeout" from="PipeCreationTimer" to="." method="_on_pipe_creation_timer_timeout"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]
