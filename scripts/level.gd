@@ -12,13 +12,13 @@ var _max_pipe_height := 700 ## Maximum height that a pipe can be at
 var _current_bounce := 0 ## Current index of AirBounce
 var _current_score := 0 ## Current score of the player
 var _current_high_score := 0 ## Current high score of the player
+var _current_profile := "Player" ## Currently selected profile
 
 @onready var _pipes: Array[Pipe]
 @onready var _pipe_creation_timer: Timer = $PipeCreationTimer
 @onready var _score_label: Label = %ScoreNumberLabel
 @onready var _audio_player: CharacterAudioPlayer = $CharacterAudioPlayer
 @onready var _air_bounces: Array[AirBounce] = [$AirBounce, $AirBounce2]
-@onready var _save_manager: SaveManager = $SaveManager
 @onready var _high_score_label: Label = %HiScoreNumberLabel
 @onready var _level_restart_timer: Timer = $LevelRestartTimer
 
@@ -37,7 +37,11 @@ func _ready() -> void:
 	# Calculate the maximum height that pipes can be at
 	_max_pipe_height = viewport_size[1] - _PIPE_GAP
 	
-	_current_high_score = _save_manager.load_high_score()
+	# Get the selected profile
+	_current_profile = SaveManager.get_solo_profile()
+	
+	# Get the high score
+	_current_high_score = SaveManager.load_high_score(_current_profile)
 	_high_score_label.text = str(_current_high_score)
 
 
@@ -135,7 +139,7 @@ func _on_player_died() -> void:
 	_audio_player.play_sound(_audio_player.DEATH_SOUND)
 	
 	if _current_score > _current_high_score:
-		_save_manager.save_high_score(_current_score)
+		SaveManager.save_high_score(_current_profile, _current_score)
 	
 	_level_restart_timer.start()
 
