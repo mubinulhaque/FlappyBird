@@ -41,7 +41,10 @@ func _on_solo_game_pressed() -> void:
 	# Get all profiles and add it to the Solo Profile Selector
 	if _profiles.is_empty():
 		_profiles = SaveManager.get_profiles()
-		_solo_play_button.disabled = true
+		
+		# If no profiles are still found
+		if _profiles.is_empty():
+			_solo_play_button.disabled = true
 		
 		for profile: String in _profiles:
 			_solo_profile_selector.add_icon_item(_BIRD_TEXTURE, profile)

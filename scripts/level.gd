@@ -50,6 +50,9 @@ func _ready() -> void:
 	# Get the high score
 	_current_high_score = SaveManager.load_high_score(_current_profile)
 	_high_score_label.text = str(_current_high_score)
+	
+	# Disable stretching the window
+	get_window().unresizable = true
 
 
 func _process(delta: float) -> void:
