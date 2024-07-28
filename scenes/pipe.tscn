@@ -15,6 +15,7 @@ monitorable = false
 script = ExtResource("1_g61uo")
 
 [node name="TopPipeSprite" type="Sprite2D" parent="."]
+z_index = 1
 position = Vector2(0, 101)
 texture = ExtResource("2_b4iyo")
 
@@ -23,6 +24,7 @@ position = Vector2(0, -94)
 shape = SubResource("RectangleShape2D_fskj2")
 
 [node name="BottomPipeSprite" type="Sprite2D" parent="."]
+z_index = 1
 position = Vector2(0, -101)
 texture = ExtResource("2_b4iyo")
 flip_v = true
