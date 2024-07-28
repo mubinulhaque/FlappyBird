@@ -7,7 +7,7 @@
 size = Vector2(24, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wapl0"]
-radius = 20.0
+radius = 27.5
 
 [node name="Pipe" type="Area2D"]
 collision_layer = 0
