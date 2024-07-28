@@ -20,7 +20,7 @@ func save_high_score(profile: String, new_score: int) -> void:
 		
 		# Save each profile
 		for profile_name: String in _profiles.keys():
-			data[profile_name + "_score"] = _profiles[name]
+			data[profile_name + "_score"] = _profiles[profile_name]
 
 		# JSON provides a static method to serialized JSON string.
 		var json_string := JSON.stringify(data)

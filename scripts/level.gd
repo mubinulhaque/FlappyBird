@@ -13,6 +13,8 @@ var _current_bounce := 0 ## Current index of AirBounce
 var _current_score := 0 ## Current score of the player
 var _current_high_score := 0 ## Current high score of the player
 var _current_profile := "Player" ## Currently selected profile
+var _offscreen_pipe: Pipe = null
+var _new_pipe_wait_time := 1.0 ## Time between pipes being generated
 
 @onready var _pipes: Array[Pipe]
 @onready var _pipe_creation_timer: Timer = $PipeCreationTimer
@@ -37,6 +39,11 @@ func _ready() -> void:
 	# Calculate the maximum height that pipes can be at
 	_max_pipe_height = viewport_size[1] - _PIPE_GAP
 	
+	# Calculate the time between pipes being generated
+	_new_pipe_wait_time = (
+			viewport_size[0] / float(_max_pipe_count - 1)
+	) / _PIPE_SPEED
+	
 	# Get the selected profile
 	_current_profile = SaveManager.get_solo_profile()
 	
@@ -50,6 +57,7 @@ func _process(delta: float) -> void:
 	for pipe in _pipes:
 		pipe.position.x -= _PIPE_SPEED * delta
 	
+	# Move air bounces to the left
 	for bounce in _air_bounces:
 		if bounce.visible:
 			bounce.position.x -= _PIPE_SPEED * delta
@@ -83,7 +91,8 @@ func _spawn_pipe(height: int) -> void:
 			printerr("Pipe scene not specified!")
 	else:
 		# If there are enough pipes already
-		_pipe_creation_timer.paused = true
+		# Move an offscreen to the right of the screen
+		_move_pipe(_get_random_pipe_height(), _offscreen_pipe)
 
 
 # Move a specified pipe
@@ -102,14 +111,16 @@ func _get_random_pipe_height() -> int:
 	return (randi() % _max_pipe_height) + (_PIPE_GAP / 2)
 
 
-# Spawns a pipe at a regular interval
+# Moves an offscreen pipe to the left
 func _on_pipe_not_visible(old_pipe: Pipe) -> void:
-	_move_pipe(_get_random_pipe_height(), old_pipe)
+	_offscreen_pipe = old_pipe
 
 
 # Spawns a pipe after a set amount of time
 func _on_pipe_creation_timer_timeout() -> void:
 	_spawn_pipe(_get_random_pipe_height())
+	
+	_pipe_creation_timer.wait_time = _new_pipe_wait_time
 
 
 # Kills a player when they hit a pipe
