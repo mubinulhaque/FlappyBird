@@ -74,7 +74,7 @@ grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 28
-text = "CHOOSE GAME MODE"
+text = "GAME MODE"
 
 [node name="CenterContainer" type="CenterContainer" parent="PlayMenu"]
 layout_mode = 1
@@ -99,15 +99,11 @@ icon = ExtResource("2_714fg")
 
 [node name="BackButton" type="Button" parent="PlayMenu"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -8.0
-offset_right = 4.0
-grow_horizontal = 2
+offset_top = -31.0
+offset_right = 50.0
 grow_vertical = 0
 text = "BACK"
 
@@ -163,6 +159,20 @@ offset_right = 50.0
 grow_vertical = 0
 text = "BACK"
 
+[node name="CreateButton" type="Button" parent="SoloProfileMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -31.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "+"
+
 [node name="PlayButton" type="Button" parent="SoloProfileMenu"]
 layout_mode = 1
 anchors_preset = 3
@@ -176,9 +186,87 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "PLAY"
 
+[node name="CreateProfileMenu" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="CreateProfileMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -56.0
+offset_right = 56.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "NEW PROFILE"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="CreateProfileMenu"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -40.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateProfileMenu/CenterContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="CreateProfileMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "NAME"
+horizontal_alignment = 1
+
+[node name="NameEdit" type="LineEdit" parent="CreateProfileMenu/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "PLAYER"
+placeholder_text = "NAME"
+alignment = 1
+
+[node name="BackButton" type="Button" parent="CreateProfileMenu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 50.0
+grow_vertical = 0
+text = "BACK"
+
+[node name="CreateButton" type="Button" parent="CreateProfileMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "CREATE"
+
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="PlayMenu/CenterContainer/HBoxContainer/SoloGame" to="." method="_on_solo_game_pressed"]
 [connection signal="pressed" from="PlayMenu/BackButton" to="." method="_on_play_menu_back_button_pressed"]
 [connection signal="pressed" from="SoloProfileMenu/BackButton" to="." method="_on_solo_profile_back_button_pressed"]
+[connection signal="pressed" from="SoloProfileMenu/CreateButton" to="." method="_on_create_profile_button_pressed" binds= ["SOLO"]]
 [connection signal="pressed" from="SoloProfileMenu/PlayButton" to="." method="_on_solo_game_play_button_pressed"]
+[connection signal="pressed" from="CreateProfileMenu/BackButton" to="." method="_on_profile_menu_back_button_pressed"]
+[connection signal="pressed" from="CreateProfileMenu/CreateButton" to="." method="_create_profile"]

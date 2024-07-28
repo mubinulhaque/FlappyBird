@@ -5,22 +5,22 @@ const _SAVE_PATH := "user://scores.save" ## File path of the save file
 
 var _save_loaded := false
 var _solo_profile := ""
-var profiles := {}
+var _profiles := {}
 
 
 # Saves a high score to the save file path
 func save_high_score(profile: String, new_score: int) -> void:
-	if profiles.has(profile):
-		profiles[profile] = new_score
+	if _profiles.has(profile):
+		_profiles[profile] = new_score
 		
 		var save_file := FileAccess.open(_SAVE_PATH, FileAccess.WRITE)
 		var data := {
-			"profiles": profiles.keys(),
+			"profiles": _profiles.keys(),
 		}
 		
 		# Save each profile
-		for name in profiles.keys():
-			data[name + "_score"] = profiles[name]
+		for name in _profiles.keys():
+			data[name + "_score"] = _profiles[name]
 
 		# JSON provides a static method to serialized JSON string.
 		var json_string := JSON.stringify(data)
@@ -40,9 +40,9 @@ func load_high_score(profile: String) -> int:
 		# If the save file has not been loaded yet
 		_load()
 	
-	if profiles.has(profile):
+	if _profiles.has(profile):
 		# If the profile exists
-		return profiles[profile]
+		return _profiles[profile]
 	else:
 		# If the profile does not exist
 		return 0
@@ -54,10 +54,10 @@ func get_profiles() -> Array:
 		# If the save file has not been loaded yet
 		_load()
 	
-	if profiles.is_empty():
+	if _profiles.is_empty():
 		printerr("No profiles found!")
 	
-	return profiles.keys()
+	return _profiles.keys()
 
 
 func _load() -> void:
@@ -94,14 +94,14 @@ func _load() -> void:
 
 		# Now load the profiles and their high scores
 		for name in node_data["profiles"]:
-			profiles[name] = node_data[name + "_score"]
+			_profiles[name] = node_data[name + "_score"]
 		
 		save_file.close()
 		_save_loaded = true
 
 
 func change_solo_profile(new_profile: String) -> void:
-	if profiles.has(new_profile):
+	if _profiles.has(new_profile):
 		_solo_profile = new_profile
 	else:
 		printerr("Incorrect solo profile selected!")
@@ -109,3 +109,7 @@ func change_solo_profile(new_profile: String) -> void:
 
 func get_solo_profile() -> String:
 	return _solo_profile
+
+
+func add_profile(new_name: String):
+	_profiles[new_name] = 0
