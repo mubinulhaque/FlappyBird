@@ -15,6 +15,7 @@ var _from_which_menu := _solo_profile_menu ## Used for returning from the Create
 
 @onready var _solo_profile_selector: OptionButton = %ProfileSelector
 @onready var _profile_name_edit: LineEdit = %NameEdit
+@onready var _solo_play_button: Button = $SoloProfileMenu/PlayButton
 
 
 func _on_exit_button_pressed() -> void:
@@ -40,6 +41,7 @@ func _on_solo_game_pressed() -> void:
 	# Get all profiles and add it to the Solo Profile Selector
 	if _profiles.is_empty():
 		_profiles = SaveManager.get_profiles()
+		_solo_play_button.disabled = true
 		
 		for profile: String in _profiles:
 			_solo_profile_selector.add_icon_item(_BIRD_TEXTURE, profile)
