@@ -94,7 +94,7 @@ func _load() -> void:
 
 		# Now load the profiles and their high scores
 		for profile_name: String in node_data["profiles"]:
-			_profiles[name] = node_data[profile_name + "_score"]
+			_profiles[profile_name] = node_data[profile_name + "_score"]
 	
 	if save_file.is_open():
 		save_file.close()
