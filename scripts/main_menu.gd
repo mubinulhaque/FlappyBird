@@ -12,10 +12,12 @@ var _from_which_menu := _solo_profile_menu ## Used for returning from the Create
 @onready var _play_menu: Control = $PlayMenu
 @onready var _solo_profile_menu: Control = $SoloProfileMenu
 @onready var _create_profile_menu: Control = $CreateProfileMenu
+@onready var _options_menu: Control = $OptionsMenu
 
 @onready var _solo_profile_selector: OptionButton = %ProfileSelector
 @onready var _profile_name_edit: LineEdit = %NameEdit
 @onready var _solo_play_button: Button = $SoloProfileMenu/PlayButton
+@onready var _test_audio_player: CharacterAudioPlayer = $OptionsMenu/TestAudioPlayer
 
 
 func _on_exit_button_pressed() -> void:
@@ -90,3 +92,19 @@ func _create_profile() -> void:
 	SaveManager.save_high_score(new_profile, 0)
 	
 	_on_profile_menu_back_button_pressed()
+
+
+## Presents the options menu
+func _on_options_button_pressed() -> void:
+	_switch_menu(_default_menu, _options_menu)
+
+
+## Sets the new volume
+func _on_sfx_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(0, linear_to_db(value))
+	_test_audio_player.play_sound(_test_audio_player.JUMP_SOUND)
+
+
+## Returns the player to the default menu
+func _on_options_menu_back_button_pressed() -> void:
+	_switch_menu(_options_menu, _default_menu)
