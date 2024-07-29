@@ -1,0 +1,3 @@
+Original game by Dong Nguyen
+Godot Engine by Godot Engine Contributors (https://godotengine.org/license/)
+Clouds by dustdfg
