@@ -1,7 +1,7 @@
 # Class used for the level to handle obstacle generation
 extends Node
 
-const _PIPE_SPEED := 100 ## Speed at which pipes move
+const _INITIAL_PIPE_SPEED := 100 ## Speed at which pipes move
 const _PIPE_GAP := 96 ## Height of the gap between vertically adjacent pipes
 
 @export var pipe_scene: PackedScene
@@ -15,6 +15,7 @@ var _current_high_score := 0 ## Current high score of the player
 var _current_profile := "Player" ## Currently selected profile
 var _offscreen_pipe: Pipe = null
 var _new_pipe_wait_time := 1.0 ## Time between pipes being generated
+var _pipe_speed: float = _INITIAL_PIPE_SPEED ## Initial speed at which pipes move
 
 @onready var _pipes: Array[Pipe]
 @onready var _pipe_creation_timer: Timer = $PipeCreationTimer
@@ -34,7 +35,7 @@ func _ready() -> void:
 	
 	# Calculate the maximum number of pipes that can be onscreen
 	@warning_ignore("integer_division")
-	_max_pipe_count = (viewport_size[0] / _PIPE_SPEED) + 1
+	_max_pipe_count = (viewport_size[0] / _pipe_speed) + 1
 	
 	# Calculate the maximum height that pipes can be at
 	_max_pipe_height = viewport_size[1] - _PIPE_GAP
@@ -42,7 +43,7 @@ func _ready() -> void:
 	# Calculate the time between pipes being generated
 	_new_pipe_wait_time = (
 			viewport_size[0] / float(_max_pipe_count - 1)
-	) / _PIPE_SPEED
+	) / _pipe_speed
 	
 	# Get the selected profile
 	_current_profile = SaveManager.get_solo_profile()
@@ -58,12 +59,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Move the pipes to the left
 	for pipe in _pipes:
-		pipe.position.x -= _PIPE_SPEED * delta
+		pipe.position.x -= _pipe_speed * delta
 	
 	# Move air bounces to the left
 	for bounce in _air_bounces:
 		if bounce.visible:
-			bounce.position.x -= _PIPE_SPEED * delta
+			bounce.position.x -= _pipe_speed * delta
 
 
 # Spawns a pipe at a specific height
@@ -137,6 +138,10 @@ func _on_player_entered_pipe(body: Node2D) -> void:
 func _on_player_entered_gap(player: Player) -> void:
 	_current_score = player.increment_score()
 	_score_label.text = str(_current_score)
+	
+	if _current_score % 50 == 0:
+		_pipe_speed *= 1.2
+		print("Increasing speed!")
 
 
 # Plays a jump sound
