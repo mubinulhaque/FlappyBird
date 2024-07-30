@@ -16,6 +16,7 @@ var _current_profile := "Player" ## Currently selected profile
 var _offscreen_pipe: Pipe = null
 var _new_pipe_wait_time := 1.0 ## Time between pipes being generated
 var _pipe_speed: float = _INITIAL_PIPE_SPEED ## Initial speed at which pipes move
+var _player_alive := true ## If the player is alive
 
 @onready var _pipes: Array[Pipe]
 @onready var _pipe_creation_timer: Timer = $PipeCreationTimer
@@ -24,6 +25,8 @@ var _pipe_speed: float = _INITIAL_PIPE_SPEED ## Initial speed at which pipes mov
 @onready var _air_bounces: Array[AirBounce] = [$AirBounce, $AirBounce2]
 @onready var _high_score_label: Label = %HiScoreNumberLabel
 @onready var _level_restart_timer: Timer = $LevelRestartTimer
+@onready var _pause_button: Button = $PauseButton
+@onready var _pause_screen: ColorRect = $PauseScreen
 
 
 func _ready() -> void:
@@ -34,7 +37,7 @@ func _ready() -> void:
 	_pipe_spawn = viewport_size[0] + (_PIPE_GAP / 2)
 	
 	# Calculate the maximum number of pipes that can be onscreen
-	@warning_ignore("integer_division")
+	@warning_ignore("narrowing_conversion")
 	_max_pipe_count = (viewport_size[0] / _pipe_speed) + 1
 	
 	# Calculate the maximum height that pipes can be at
@@ -65,6 +68,11 @@ func _process(delta: float) -> void:
 	for bounce in _air_bounces:
 		if bounce.visible:
 			bounce.position.x -= _pipe_speed * delta
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("game_pause"):
+		_on_pause_button_pressed()
 
 
 # Spawns a pipe at a specific height
@@ -155,6 +163,7 @@ func _on_player_jumped(player_position: Vector2) -> void:
 
 # Plays a death sound and, if necessary, saves the player's new high score
 func _on_player_died() -> void:
+	_player_alive = false
 	_audio_player.play_sound(_audio_player.DEATH_SOUND)
 	
 	if _current_score > _current_high_score:
@@ -166,3 +175,24 @@ func _on_player_died() -> void:
 func _on_level_restart_timer_timeout() -> void:
 	get_tree().paused = false
 	get_tree().reload_current_scene()
+
+
+func _on_pause_button_pressed() -> void:
+	if _player_alive:
+		get_tree().paused = !get_tree().paused
+		_pause_screen.visible = get_tree().paused
+		
+		if get_tree().paused:
+			_pause_button.text = "I>"
+		else:
+			_pause_button.text = "II"
+
+
+func _on_main_menu_button_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+
+func _on_exit_button_pressed() -> void:
+	get_tree().paused = false
+	get_tree().quit()

@@ -110,7 +110,60 @@ visible = false
 [node name="AirBounce2" parent="." instance=ExtResource("6_50hjp")]
 visible = false
 
+[node name="PauseScreen" type="ColorRect" parent="."]
+visible = false
+z_index = 9
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="CenterContainer" type="CenterContainer" parent="PauseScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen/CenterContainer"]
+layout_mode = 2
+
+[node name="PauseLabel" type="Label" parent="PauseScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="PauseScreen/CenterContainer/VBoxContainer"]
+process_mode = 2
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="ExitButton" type="Button" parent="PauseScreen/CenterContainer/VBoxContainer"]
+process_mode = 2
+layout_mode = 2
+text = "EXIT"
+
+[node name="PauseButton" type="Button" parent="."]
+process_mode = 3
+z_index = 10
+custom_minimum_size = Vector2(30, 30)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_bottom = 31.0
+grow_horizontal = 0
+focus_mode = 0
+text = "II"
+
 [connection signal="timeout" from="PipeCreationTimer" to="." method="_on_pipe_creation_timer_timeout"]
 [connection signal="timeout" from="LevelRestartTimer" to="." method="_on_level_restart_timer_timeout"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="jumped" from="Player" to="." method="_on_player_jumped"]
+[connection signal="pressed" from="PauseScreen/CenterContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="PauseScreen/CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
