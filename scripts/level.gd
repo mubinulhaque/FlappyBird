@@ -27,6 +27,7 @@ var _player_alive := true ## If the player is alive
 @onready var _level_restart_timer: Timer = $LevelRestartTimer
 @onready var _pause_button: Button = $PauseButton
 @onready var _pause_screen: ColorRect = $PauseScreen
+@onready var _background: ParallaxBackground = $ParallaxBackground
 
 
 func _ready() -> void:
@@ -68,6 +69,8 @@ func _process(delta: float) -> void:
 	for bounce in _air_bounces:
 		if bounce.visible:
 			bounce.position.x -= _pipe_speed * delta
+	
+	_background.scroll_offset.x -= _pipe_speed * 0.5 * delta
 
 
 func _input(event: InputEvent) -> void:

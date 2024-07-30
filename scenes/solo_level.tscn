@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbnk0strplsql"]
+[gd_scene load_steps=8 format=3 uid="uid://bbnk0strplsql"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_qp3jm"]
 [ext_resource type="PackedScene" uid="uid://duuxnkk2m4afr" path="res://scenes/pipe.tscn" id="2_fmd4i"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cjuvsiau56soy" path="res://audio/sounds/jump.wav" id="4_cbnj4"]
 [ext_resource type="Script" path="res://scripts/character_audio_player.gd" id="5_gm2m7"]
 [ext_resource type="PackedScene" uid="uid://beovkyl6fn7dd" path="res://scenes/air_bounce.tscn" id="6_50hjp"]
+[ext_resource type="Texture2D" uid="uid://bedkwh4mouh55" path="res://textures/cloud.png" id="7_mk0k8"]
 
 [node name="SoloLevel" type="Node"]
 script = ExtResource("1_qp3jm")
@@ -159,6 +160,26 @@ offset_bottom = 31.0
 grow_horizontal = 0
 focus_mode = 0
 text = "II"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(320, 0)
+
+[node name="Cloud" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+z_index = -1
+position = Vector2(161, 54)
+texture = ExtResource("7_mk0k8")
+
+[node name="Cloud2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+z_index = -1
+position = Vector2(55, 105)
+texture = ExtResource("7_mk0k8")
+
+[node name="Cloud3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+z_index = -1
+position = Vector2(232, 116)
+texture = ExtResource("7_mk0k8")
 
 [connection signal="timeout" from="PipeCreationTimer" to="." method="_on_pipe_creation_timer_timeout"]
 [connection signal="timeout" from="LevelRestartTimer" to="." method="_on_level_restart_timer_timeout"]
