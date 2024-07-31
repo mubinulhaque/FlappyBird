@@ -150,9 +150,9 @@ func _on_player_entered_gap(player: Player) -> void:
 	_current_score = player.increment_score()
 	_score_label.text = str(_current_score)
 	
-	if _current_score % 50 == 0:
-		_pipe_speed *= 1.2
-		print("Increasing speed!")
+	if _current_score % 20 == 0:
+		_pipe_speed *= 1.05
+		print("Increasing speed to ", _pipe_speed, "!")
 
 
 # Plays a jump sound
