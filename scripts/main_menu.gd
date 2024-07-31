@@ -99,12 +99,6 @@ func _on_options_button_pressed() -> void:
 	_switch_menu(_default_menu, _options_menu)
 
 
-## Sets the new volume
-func _on_sfx_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(0, linear_to_db(value))
-	_test_audio_player.play_sound(_test_audio_player.JUMP_SOUND)
-
-
 ## Returns the player to the default menu
 func _on_options_menu_back_button_pressed() -> void:
 	_switch_menu(_options_menu, _default_menu)

@@ -16,9 +16,9 @@ func _ready() -> void:
 
 
 ## Plays a player's death sound
-func play_sound(sound: AudioStream) -> void:
+func play_sound(sound: AudioStream, add_to_queue := true) -> void:
 	if sound:
-		if playing:
+		if playing and add_to_queue:
 			queue.append(sound)
 		else:
 			stream = sound

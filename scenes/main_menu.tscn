@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bc403ub83m53o"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_3n0m8"]
+[ext_resource type="PackedScene" uid="uid://c3o1j4v8xyswq" path="res://scenes/options_menu.tscn" id="2_5ps2a"]
 [ext_resource type="Texture2D" uid="uid://c7cupffibwqax" path="res://textures/ui/singleplayer.png" id="2_714fg"]
-[ext_resource type="Script" path="res://scripts/character_audio_player.gd" id="2_r2n4m"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -60,68 +60,8 @@ text = "OPTIONS"
 layout_mode = 2
 text = "EXIT"
 
-[node name="OptionsMenu" type="Control" parent="."]
-visible = false
+[node name="OptionsMenu" parent="." instance=ExtResource("2_5ps2a")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Title" type="Label" parent="OptionsMenu"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -35.5
-offset_right = 35.5
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 24
-text = "OPTIONS"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TestAudioPlayer" type="AudioStreamPlayer" parent="OptionsMenu"]
-script = ExtResource("2_r2n4m")
-
-[node name="CenterContainer" type="CenterContainer" parent="OptionsMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/CenterContainer"]
-layout_mode = 2
-
-[node name="SFXLabel" type="Label" parent="OptionsMenu/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "SOUND EFFECTS"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SFXSlider" type="HSlider" parent="OptionsMenu/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.1
-value = 1.0
-tick_count = 11
-
-[node name="BackButton" type="Button" parent="OptionsMenu"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -8.0
-offset_right = 8.0
-grow_vertical = 0
-text = "BACK"
 
 [node name="PlayMenu" type="Control" parent="."]
 visible = false
@@ -339,8 +279,7 @@ text = "CREATE"
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="value_changed" from="OptionsMenu/CenterContainer/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
-[connection signal="pressed" from="OptionsMenu/BackButton" to="." method="_on_options_menu_back_button_pressed"]
+[connection signal="back_button_pressed" from="OptionsMenu" to="." method="_on_options_menu_back_button_pressed"]
 [connection signal="pressed" from="PlayMenu/CenterContainer/HBoxContainer/SoloGame" to="." method="_on_solo_game_pressed"]
 [connection signal="pressed" from="PlayMenu/BackButton" to="." method="_on_play_menu_back_button_pressed"]
 [connection signal="pressed" from="SoloProfileMenu/BackButton" to="." method="_on_solo_profile_back_button_pressed"]
