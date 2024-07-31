@@ -32,8 +32,10 @@ offset_bottom = 45.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "FLAPPY BIRD"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="DefaultMenu"]
 layout_mode = 1
@@ -76,6 +78,9 @@ offset_left = -35.5
 offset_right = 35.5
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 24
 text = "OPTIONS"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -138,8 +143,10 @@ offset_bottom = 45.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "GAME MODE"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="PlayMenu"]
 layout_mode = 1
@@ -192,9 +199,10 @@ offset_bottom = 45.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "PROFILE"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="SoloProfileMenu"]
 layout_mode = 1
@@ -271,9 +279,10 @@ offset_bottom = 45.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "NEW PROFILE"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="CreateProfileMenu"]
 layout_mode = 1
@@ -298,6 +307,7 @@ horizontal_alignment = 1
 
 [node name="NameEdit" type="LineEdit" parent="CreateProfileMenu/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 text = "PLAYER"
 placeholder_text = "NAME"
