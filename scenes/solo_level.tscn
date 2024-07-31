@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbnk0strplsql"]
+[gd_scene load_steps=12 format=3 uid="uid://bbnk0strplsql"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_qp3jm"]
 [ext_resource type="PackedScene" uid="uid://duuxnkk2m4afr" path="res://scenes/pipe.tscn" id="2_fmd4i"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/character_audio_player.gd" id="5_gm2m7"]
 [ext_resource type="PackedScene" uid="uid://beovkyl6fn7dd" path="res://scenes/air_bounce.tscn" id="6_50hjp"]
 [ext_resource type="Texture2D" uid="uid://bedkwh4mouh55" path="res://textures/cloud.png" id="7_mk0k8"]
+[ext_resource type="Script" path="res://scripts/debug_label.gd" id="8_0xk15"]
 
 [sub_resource type="Animation" id="Animation_oniqx"]
 length = 0.001
@@ -263,6 +264,26 @@ process_mode = 2
 libraries = {
 "": SubResource("AnimationLibrary_27egv")
 }
+
+[node name="DebugLabel" type="RichTextLabel" parent="."]
+z_index = 11
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 4
+bbcode_enabled = true
+text = "1
+2
+3
+4
+5
+6
+7"
+fit_content = true
+script = ExtResource("8_0xk15")
 
 [connection signal="timeout" from="PipeCreationTimer" to="." method="_on_pipe_creation_timer_timeout"]
 [connection signal="timeout" from="LevelRestartTimer" to="." method="_on_level_restart_timer_timeout"]
