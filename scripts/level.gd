@@ -28,6 +28,7 @@ var _player_alive := true ## If the player is alive
 @onready var _pause_button: Button = $PauseButton
 @onready var _pause_screen: ColorRect = $PauseScreen
 @onready var _background: ParallaxBackground = $ParallaxBackground
+@onready var _high_score_animator: AnimationPlayer = %HighScoreAnimator
 
 
 func _ready() -> void:
@@ -171,6 +172,7 @@ func _on_player_died() -> void:
 	
 	if _current_score > _current_high_score:
 		SaveManager.save_high_score(_current_profile, _current_score)
+		_audio_player.play_sound(_audio_player.CLAP_SOUND)
 	
 	_level_restart_timer.start()
 
@@ -199,3 +201,7 @@ func _on_main_menu_button_pressed() -> void:
 func _on_exit_button_pressed() -> void:
 	get_tree().paused = false
 	get_tree().quit()
+
+
+func _on_new_high_score() -> void:
+	_high_score_animator.play("new_high_score")
