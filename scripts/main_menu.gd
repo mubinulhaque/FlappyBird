@@ -17,7 +17,6 @@ var _from_which_menu := _solo_profile_menu ## Used for returning from the Create
 @onready var _solo_profile_selector: OptionButton = %ProfileSelector
 @onready var _profile_name_edit: LineEdit = %NameEdit
 @onready var _solo_play_button: Button = $SoloProfileMenu/PlayButton
-@onready var _test_audio_player: CharacterAudioPlayer = $OptionsMenu/TestAudioPlayer
 
 
 func _on_exit_button_pressed() -> void:

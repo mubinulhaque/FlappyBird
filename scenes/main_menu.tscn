@@ -61,6 +61,7 @@ layout_mode = 2
 text = "EXIT"
 
 [node name="OptionsMenu" parent="." instance=ExtResource("2_5ps2a")]
+visible = false
 layout_mode = 1
 
 [node name="PlayMenu" type="Control" parent="."]

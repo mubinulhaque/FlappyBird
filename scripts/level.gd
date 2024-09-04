@@ -1,7 +1,7 @@
 # Class used for the level to handle obstacle generation
 extends Node
 
-const _INITIAL_PIPE_SPEED := 100 ## Speed at which pipes move
+const _INITIAL_PIPE_SPEED := 100 ## Dpeed at which pipes move
 const _PIPE_GAP := 96 ## Height of the gap between vertically adjacent pipes
 
 @export var pipe_scene: PackedScene
@@ -29,6 +29,7 @@ var _player_alive := true ## If the player is alive
 @onready var _pause_screen: ColorRect = $PauseScreen
 @onready var _background: ParallaxBackground = $ParallaxBackground
 @onready var _high_score_animator: AnimationPlayer = %HighScoreAnimator
+@onready var _options_menu: Control = $PauseScreen/OptionsMenu
 
 
 func _ready() -> void:
@@ -205,3 +206,7 @@ func _on_exit_button_pressed() -> void:
 
 func _on_new_high_score() -> void:
 	_high_score_animator.play("new_high_score")
+
+
+func _on_options_button_pressed() -> void:
+	_options_menu.visible = !_options_menu.visible

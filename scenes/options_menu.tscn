@@ -4,7 +4,6 @@
 [ext_resource type="Script" path="res://scripts/character_audio_player.gd" id="1_njvow"]
 
 [node name="OptionsMenu" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
