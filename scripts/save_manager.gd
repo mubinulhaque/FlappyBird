@@ -20,7 +20,7 @@ func save_high_score(profile: String, new_score: int) -> void:
 		
 		# Save each profile
 		for profile_name: String in _profiles.keys():
-			data[profile_name + "_score"] = _profiles[profile_name]
+			data[profile_name.to_lower() + "_score"] = _profiles[profile_name.to_lower()]
 
 		# JSON provides a static method to serialized JSON string.
 		var json_string := JSON.stringify(data)
@@ -94,7 +94,7 @@ func _load() -> void:
 
 		# Now load the profiles and their high scores
 		for profile_name: String in node_data["profiles"]:
-			_profiles[profile_name] = node_data[profile_name + "_score"]
+			_profiles[profile_name] = node_data[profile_name.to_lower() + "_score"]
 	
 	if save_file.is_open():
 		save_file.close()
