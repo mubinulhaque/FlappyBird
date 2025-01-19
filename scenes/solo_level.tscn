@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbnk0strplsql"]
+[gd_scene load_steps=14 format=3 uid="uid://bbnk0strplsql"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_qp3jm"]
 [ext_resource type="PackedScene" uid="uid://duuxnkk2m4afr" path="res://scenes/pipe.tscn" id="2_fmd4i"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://beovkyl6fn7dd" path="res://scenes/air_bounce.tscn" id="6_50hjp"]
 [ext_resource type="PackedScene" uid="uid://c3o1j4v8xyswq" path="res://scenes/options_menu.tscn" id="7_jmc1v"]
 [ext_resource type="Texture2D" uid="uid://bedkwh4mouh55" path="res://textures/cloud.png" id="7_mk0k8"]
+[ext_resource type="Texture2D" uid="uid://d1645otvyq65r" path="res://textures/ui/pause-button.svg" id="8_0v15n"]
 [ext_resource type="Script" path="res://scripts/debug_label.gd" id="8_0xk15"]
 
 [sub_resource type="Animation" id="Animation_oniqx"]
@@ -223,15 +224,16 @@ text = "EXIT"
 [node name="PauseButton" type="Button" parent="."]
 process_mode = 3
 z_index = 10
-custom_minimum_size = Vector2(30, 30)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -30.0
-offset_bottom = 31.0
+offset_left = -26.0
+offset_right = 494.0
+offset_bottom = 520.0
 grow_horizontal = 0
+scale = Vector2(0.05, 0.05)
 focus_mode = 0
-text = "II"
+icon = ExtResource("8_0v15n")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

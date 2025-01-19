@@ -1,8 +1,10 @@
 # Class used for the level to handle obstacle generation
 extends Node
 
-const _INITIAL_PIPE_SPEED := 100 ## Dpeed at which pipes move
+const _INITIAL_PIPE_SPEED := 100 ## Speed at which pipes move
 const _PIPE_GAP := 96 ## Height of the gap between vertically adjacent pipes
+const _PLAY_ICON := preload("res://textures/ui/play-button.svg")
+const _PAUSE_ICON := preload("res://textures/ui/pause-button.svg")
 
 @export var pipe_scene: PackedScene
 
@@ -189,9 +191,9 @@ func _on_pause_button_pressed() -> void:
 		_pause_screen.visible = get_tree().paused
 		
 		if get_tree().paused:
-			_pause_button.text = "I>"
+			_pause_button.icon = _PLAY_ICON
 		else:
-			_pause_button.text = "II"
+			_pause_button.icon = _PAUSE_ICON
 
 
 func _on_main_menu_button_pressed() -> void:
