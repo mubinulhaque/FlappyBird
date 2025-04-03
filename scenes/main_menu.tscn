@@ -279,6 +279,7 @@ text = "CREATE"
 
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/OptionsButton" to="OptionsMenu" method="_load_settings"]
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="back_button_pressed" from="OptionsMenu" to="." method="_on_options_menu_back_button_pressed"]
 [connection signal="pressed" from="PlayMenu/CenterContainer/HBoxContainer/SoloGame" to="." method="_on_solo_game_pressed"]

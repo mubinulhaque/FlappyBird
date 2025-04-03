@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c3o1j4v8xyswq"]
 
-[ext_resource type="Script" path="res://scripts/options_menu.gd" id="1_0vmxj"]
-[ext_resource type="Script" path="res://scripts/character_audio_player.gd" id="1_njvow"]
+[ext_resource type="Script" uid="uid://dtud5q2sygguy" path="res://scripts/options_menu.gd" id="1_0vmxj"]
+[ext_resource type="Script" uid="uid://c60ky00h2apg1" path="res://scripts/character_audio_player.gd" id="1_njvow"]
 
 [node name="OptionsMenu" type="Control"]
 layout_mode = 3
@@ -39,16 +39,44 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="TabContainer" type="TabContainer" parent="CenterContainer"]
+layout_mode = 2
+tab_alignment = 1
+current_tab = 0
+
+[node name="Display" type="MarginContainer" parent="CenterContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/TabContainer/Display"]
+layout_mode = 2
+columns = 2
+
+[node name="MonitorLabel" type="Label" parent="CenterContainer/TabContainer/Display/GridContainer"]
+layout_mode = 2
+text = "MONITOR"
+uppercase = true
+
+[node name="MonitorOptions" type="OptionButton" parent="CenterContainer/TabContainer/Display/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SFXLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Sound" type="MarginContainer" parent="CenterContainer/TabContainer"]
+visible = false
 layout_mode = 2
-text = "SOUND EFFECTS"
+metadata/_tab_index = 1
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/TabContainer/Sound"]
+layout_mode = 2
+columns = 2
+
+[node name="SFXLabel" type="Label" parent="CenterContainer/TabContainer/Sound/GridContainer"]
+layout_mode = 2
+text = "SFX"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SFXSlider" type="HSlider" parent="CenterContainer/VBoxContainer"]
+[node name="SFXSlider" type="HSlider" parent="CenterContainer/TabContainer/Sound/GridContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 max_value = 1.0
@@ -66,5 +94,6 @@ offset_right = 8.0
 grow_vertical = 0
 text = "BACK"
 
-[connection signal="value_changed" from="CenterContainer/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="item_selected" from="CenterContainer/TabContainer/Display/GridContainer/MonitorOptions" to="." method="_on_monitor_options_item_selected"]
+[connection signal="value_changed" from="CenterContainer/TabContainer/Sound/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -2,7 +2,43 @@ extends Control
 
 signal back_button_pressed ## Emitted when the back button is pressed
 
+var _settings_loaded := false ## Has the settings been loaded yet?
+
+@onready var _monitors: OptionButton = %MonitorOptions
 @onready var _test_audio_player: CharacterAudioPlayer = $TestAudioPlayer
+@onready var _window: Window = get_tree().root
+
+
+func _load_settings() -> void:
+	if not _settings_loaded:
+		# If the settings haven't been loaded yet
+		print("Loading settings!")
+		_settings_loaded = true
+		
+		# List all monitors the user has
+		for i in DisplayServer.get_screen_count():
+			# Set the name of monitor to its index and resolution
+			var screen_name := (
+					"Monitor "
+					+ str(i + 1)
+					+ " ("
+					+ str(DisplayServer.screen_get_size(i)[0])
+					+ " x "
+					+ str(DisplayServer.screen_get_size(i)[1])
+					+ ")"
+			)
+			
+			if DisplayServer.get_primary_screen() == i:
+				# If adding a primary monitor
+				_monitors.add_item(screen_name + " (Primary)")
+			else:
+				# If adding a non-primary monitor
+				_monitors.add_item(screen_name)
+
+
+## Emits a signal for the main menu to be displayed
+func _on_back_button_pressed() -> void:
+	back_button_pressed.emit()
 
 
 ## Sets the new volume
@@ -11,5 +47,6 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 	_test_audio_player.play_sound(_test_audio_player.JUMP_SOUND, false)
 
 
-func _on_back_button_pressed() -> void:
-	back_button_pressed.emit()
+## Changes the monitor the game is displayed
+func _on_monitor_options_item_selected(index: int) -> void:
+	_window.current_screen = index

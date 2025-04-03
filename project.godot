@@ -34,6 +34,7 @@ window/stretch/aspect="expand"
 
 [gui]
 
+theme/custom="uid://6ab2ite7014b"
 theme/custom_font="res://kenney_pixel_square.ttf"
 
 [input]
