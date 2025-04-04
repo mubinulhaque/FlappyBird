@@ -5,6 +5,7 @@ signal back_button_pressed ## Emitted when the back button is pressed
 var _settings_loaded := false ## Has the settings been loaded yet?
 
 @onready var _monitors: OptionButton = %MonitorOptions
+@onready var _resolutions: OptionButton = %ResolutionOptions
 @onready var _test_audio_player: CharacterAudioPlayer = $TestAudioPlayer
 @onready var _window: Window = get_tree().root
 
@@ -100,6 +101,14 @@ func _on_msaa_options_item_selected(index: int) -> void:
 		3:
 			# Multisample Anti-Aliasing 8x
 			_window.msaa_3d = Viewport.MSAA_8X
+
+
+## Changes the resolution of the game window
+## Note: unsure why, but Godot doesn't change window size accurately
+func _on_resolution_options_item_selected(index: int) -> void:
+	var new_res := _resolutions.get_item_text(index).split(" x ")
+	var new_size := Vector2i(int(new_res[0]), int(new_res[1]))
+	_window.size = new_size
 
 
 ## Sets the new volume
