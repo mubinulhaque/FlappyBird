@@ -54,6 +54,26 @@ func _on_monitor_options_item_selected(index: int) -> void:
 	_window.current_screen = index
 
 
+## Changes the type of MultiSample Anti-Aliasing used
+func _on_msaa_options_item_selected(index: int) -> void:
+	match index:
+		0:
+			# Disabled
+			_window.msaa_3d = Viewport.MSAA_DISABLED
+		
+		1:
+			# Multisample Anti-Aliasing 2x
+			_window.msaa_3d = Viewport.MSAA_2X
+		
+		2:
+			# Multisample Anti-Aliasing 4x
+			_window.msaa_3d = Viewport.MSAA_4X
+		
+		3:
+			# Multisample Anti-Aliasing 8x
+			_window.msaa_3d = Viewport.MSAA_8X
+
+
 ## Sets the new volume
 func _on_sfx_slider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(0, linear_to_db(value))
