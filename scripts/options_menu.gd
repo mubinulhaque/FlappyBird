@@ -41,6 +41,34 @@ func _on_back_button_pressed() -> void:
 	back_button_pressed.emit()
 
 
+## Changes the maximum FPS to be used
+func _on_fps_options_item_selected(index: int) -> void:
+	match index:
+		0:
+			# Unlimited
+			Engine.max_fps = 0
+		
+		1:
+			# 30
+			Engine.max_fps = 30
+		
+		2:
+			# 40
+			Engine.max_fps = 40
+		
+		3:
+			# 60
+			Engine.max_fps = 60
+		
+		4:
+			# 72
+			Engine.max_fps = 72
+		
+		5:
+			# 120
+			Engine.max_fps = 120
+
+
 ## Toggles Fast Approximate Anti-Aliasing
 func _on_fxaa_check_toggled(toggled_on: bool) -> void:
 	_window.screen_space_aa = (
