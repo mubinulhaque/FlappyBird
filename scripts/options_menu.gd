@@ -41,15 +41,23 @@ func _on_back_button_pressed() -> void:
 	back_button_pressed.emit()
 
 
-## Sets the new volume
-func _on_sfx_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(0, linear_to_db(value))
-	_test_audio_player.play_sound(_test_audio_player.JUMP_SOUND, false)
+## Toggles Fast Approximate Anti-Aliasing
+func _on_fxaa_check_toggled(toggled_on: bool) -> void:
+	_window.screen_space_aa = (
+			Viewport.SCREEN_SPACE_AA_FXAA if toggled_on
+			else Viewport.SCREEN_SPACE_AA_DISABLED
+	)
 
 
 ## Changes the monitor the game is displayed
 func _on_monitor_options_item_selected(index: int) -> void:
 	_window.current_screen = index
+
+
+## Sets the new volume
+func _on_sfx_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(0, linear_to_db(value))
+	_test_audio_player.play_sound(_test_audio_player.JUMP_SOUND, false)
 
 
 ## Changes whether the game is in windowed mode, borderless fullscreen or
