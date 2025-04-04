@@ -181,5 +181,6 @@ grow_vertical = 0
 text = "BACK"
 
 [connection signal="item_selected" from="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer/MonitorOptions" to="." method="_on_monitor_options_item_selected"]
+[connection signal="item_selected" from="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer/WindowedOptions" to="." method="_on_windowed_options_item_selected"]
 [connection signal="value_changed" from="CenterContainer/TabContainer/Sound/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

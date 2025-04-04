@@ -50,3 +50,21 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 ## Changes the monitor the game is displayed
 func _on_monitor_options_item_selected(index: int) -> void:
 	_window.current_screen = index
+
+
+## Changes whether the game is in windowed mode, borderless fullscreen or
+## exclusive fullscreen
+func _on_windowed_options_item_selected(index: int) -> void:
+	match index:
+		0:
+			# Windowed
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		1:
+			# Borderless Fullscreen
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		2:
+			# Exclusive Fullscreen
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
