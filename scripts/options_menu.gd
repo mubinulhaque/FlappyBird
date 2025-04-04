@@ -2,6 +2,8 @@ extends Control
 
 signal back_button_pressed ## Emitted when the back button is pressed
 
+const _SETTINGS_VERSION: int = 0
+
 var _settings_loaded := false ## Has the settings been loaded yet?
 
 @onready var _monitors: OptionButton = %MonitorOptions
@@ -35,11 +37,43 @@ func _load_settings() -> void:
 			else:
 				# If adding a non-primary monitor
 				_monitors.add_item(screen_name)
+			
+			var settings := ConfigFile.new()
+			var error := settings.load("user://settings.ini")
+			
+			# Don't bother loading anything if the file hasn't been opened properly
+			if error != OK:
+				printerr("Error loading settings! " + str(error))
+				return
+			
+			if settings.get_value("", "version") == _SETTINGS_VERSION:
+				# Current monitor of the game window
+				_window.current_screen = settings.get_value("display", "screen")
+				# Fullscreen mode of the game window
+				_window.mode = settings.get_value("display", "fullscreen")
+				# Resolution of the game window
+				_window.size = settings.get_value("display", "resolution")
+				# Whether FXAA is enabled
+				_window.screen_space_aa = (
+						Viewport.SCREEN_SPACE_AA_FXAA if settings.get_value("display", "fxaa")
+						else Viewport.SCREEN_SPACE_AA_DISABLED
+				)
+				# Type of MSAA used
+				_window.msaa_3d = settings.get_value("display", "msaa")
+				# FPS limit
+				Engine.max_fps = settings.get_value("display", "fps")
+				# SFX volume
+				AudioServer.set_bus_volume_linear(0, settings.get_value("volume", "sfx"))
+				
+				_update_ui()
+			else:
+				printerr("The save file is not in the correct version!")
 
 
 ## Emits a signal for the main menu to be displayed
 func _on_back_button_pressed() -> void:
 	back_button_pressed.emit()
+	_save_settings()
 
 
 ## Changes the maximum FPS to be used
@@ -133,3 +167,39 @@ func _on_windowed_options_item_selected(index: int) -> void:
 			# Exclusive Fullscreen
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+
+
+## Saves settings into a file in the user directory
+func _save_settings() -> void:
+	# Create/Overwrite a Config File
+	var settings := ConfigFile.new()
+	
+	# Version of save files; useful for moving between game versions
+	settings.set_value("", "version", _SETTINGS_VERSION)
+	
+	# Current screen the game is on
+	settings.set_value("display", "screen", _window.current_screen)
+	# Fullscreen mode of the game window
+	settings.set_value("display", "fullscreen", _window.mode)
+	# Resolution of the game window 
+	settings.set_value("display", "resolution", _window.size)
+	# Whether FXAA is enabled
+	settings.set_value(
+			"display",
+			"fxaa",
+			_window.screen_space_aa == Viewport.SCREEN_SPACE_AA_FXAA
+	)
+	# Type of MSAA used
+	settings.set_value("display", "msaa", _window.msaa_3d)
+	# FPS limit
+	settings.set_value("display", "fps", Engine.max_fps)
+	# SFX volume
+	settings.set_value("volume", "sfx", AudioServer.get_bus_volume_linear(0))
+	
+	# Save the settings called settings.ini
+	settings.save("user://settings.ini")
+
+
+func _update_ui() -> void:
+	print("Updating UI!")
+	print("Hi UI!")
