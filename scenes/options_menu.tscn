@@ -72,6 +72,7 @@ text = "WINDOW MODE"
 uppercase = true
 
 [node name="WindowedOptions" type="OptionButton" parent="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 selected = 0
 item_count = 3
@@ -109,6 +110,7 @@ text = "FXAA"
 uppercase = true
 
 [node name="FxaaCheck" type="CheckButton" parent="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="MsaaLabel" type="Label" parent="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer"]
@@ -117,6 +119,7 @@ text = "MSAA"
 uppercase = true
 
 [node name="MsaaOptions" type="OptionButton" parent="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 selected = 0
 item_count = 4
@@ -135,6 +138,7 @@ text = "FPS Limit"
 uppercase = true
 
 [node name="FpsOptions" type="OptionButton" parent="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 selected = 3
 item_count = 6
@@ -167,6 +171,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SFXSlider" type="HSlider" parent="CenterContainer/TabContainer/Sound/GridContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 max_value = 1.0

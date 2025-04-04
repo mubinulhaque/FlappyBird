@@ -2,21 +2,25 @@ extends Control
 
 signal back_button_pressed ## Emitted when the back button is pressed
 
-const _SETTINGS_VERSION: int = 0
+const _SETTINGS_VERSION := 0 ## Version of the save file
 
 var _settings_loaded := false ## Has the settings been loaded yet?
 
+@onready var _fps: OptionButton = %FpsOptions
+@onready var _fxaa_check: CheckButton = %FxaaCheck
 @onready var _monitors: OptionButton = %MonitorOptions
+@onready var _msaa: OptionButton = %MsaaOptions
 @onready var _resolutions: OptionButton = %ResolutionOptions
+@onready var _sfx_volume: HSlider = %SFXSlider
 @onready var _test_audio_player: CharacterAudioPlayer = $TestAudioPlayer
 @onready var _window: Window = get_tree().root
+@onready var _windowed: OptionButton = %WindowedOptions
 
 
 func _load_settings() -> void:
 	if not _settings_loaded:
 		# If the settings haven't been loaded yet
 		print("Loading settings!")
-		_settings_loaded = true
 		
 		# List all monitors the user has
 		for i in DisplayServer.get_screen_count():
@@ -68,6 +72,8 @@ func _load_settings() -> void:
 				_update_ui()
 			else:
 				printerr("The save file is not in the correct version!")
+		
+		_settings_loaded = true
 
 
 ## Emits a signal for the main menu to be displayed
@@ -200,6 +206,59 @@ func _save_settings() -> void:
 	settings.save("user://settings.ini")
 
 
+## Update the UI to reflect newly loaded settings
+## TODO: figure out why this function runs twice
 func _update_ui() -> void:
-	print("Updating UI!")
-	print("Hi UI!")
+	if not _settings_loaded:
+		# If the settings haven't been loaded yet
+		print("Updating UI!")
+		_settings_loaded = true
+		
+		# List all monitors the user has
+		for i in DisplayServer.get_screen_count():
+			# Set the name of monitor to its index and resolution
+			var screen_name := (
+					"Monitor "
+					+ str(i + 1)
+					+ " ("
+					+ str(DisplayServer.screen_get_size(i)[0])
+					+ " x "
+					+ str(DisplayServer.screen_get_size(i)[1])
+					+ ")"
+			)
+			
+			if DisplayServer.get_primary_screen() == i:
+				# If adding a primary monitor
+				_monitors.add_item(screen_name + " (Primary)")
+			else:
+				# If adding a non-primary monitor
+				_monitors.add_item(screen_name)
+		
+		# Update the user interface to be accurate
+		# Current monitor of the game window
+		_monitors.selected = _window.current_screen
+		# Fullscreen mode of the game window
+		_windowed.selected = (
+				2 if _window.mode == Window.MODE_EXCLUSIVE_FULLSCREEN
+				else 1 if _window.mode == Window.MODE_FULLSCREEN
+				else 0
+		)
+		# Resolution of the game window
+		for res_index: int in range(_resolutions.item_count):
+			var res_string := _resolutions.get_item_text(res_index).split(" x ")
+			var res_vector := Vector2i(int(res_string[0]), int(res_string[1]))
+			
+			if res_vector == _window.size:
+				_resolutions.selected = res_index
+		# Whether FXAA is enabled
+		_fxaa_check.set_pressed_no_signal(
+				_window.screen_space_aa == Viewport.SCREEN_SPACE_AA_FXAA
+		)
+		# Type of MSAA used
+		_msaa.selected = _window.msaa_3d
+		# FPS limit
+		for fps_index: int in range(_fps.item_count):
+			if _fps.get_item_text(fps_index) == str(Engine.max_fps):
+				_fps.selected = fps_index
+		# SFX volume
+		_sfx_volume.set_value_no_signal(AudioServer.get_bus_volume_linear(0))
