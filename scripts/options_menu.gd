@@ -207,7 +207,6 @@ func _save_settings() -> void:
 
 
 ## Update the UI to reflect newly loaded settings
-## TODO: figure out why this function runs twice
 func _update_ui() -> void:
 	if not _settings_loaded:
 		# If the settings haven't been loaded yet
