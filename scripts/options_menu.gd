@@ -63,7 +63,7 @@ func _load_settings() -> void:
 						else Viewport.SCREEN_SPACE_AA_DISABLED
 				)
 				# Type of MSAA used
-				_window.msaa_3d = settings.get_value("display", "msaa")
+				_window.msaa_2d = settings.get_value("display", "msaa")
 				# FPS limit
 				Engine.max_fps = settings.get_value("display", "fps")
 				# SFX volume
@@ -128,19 +128,19 @@ func _on_msaa_options_item_selected(index: int) -> void:
 	match index:
 		0:
 			# Disabled
-			_window.msaa_3d = Viewport.MSAA_DISABLED
+			_window.msaa_2d = Viewport.MSAA_DISABLED
 		
 		1:
 			# Multisample Anti-Aliasing 2x
-			_window.msaa_3d = Viewport.MSAA_2X
+			_window.msaa_2d = Viewport.MSAA_2X
 		
 		2:
 			# Multisample Anti-Aliasing 4x
-			_window.msaa_3d = Viewport.MSAA_4X
+			_window.msaa_2d = Viewport.MSAA_4X
 		
 		3:
 			# Multisample Anti-Aliasing 8x
-			_window.msaa_3d = Viewport.MSAA_8X
+			_window.msaa_2d = Viewport.MSAA_8X
 
 
 ## Changes the resolution of the game window
@@ -196,7 +196,7 @@ func _save_settings() -> void:
 			_window.screen_space_aa == Viewport.SCREEN_SPACE_AA_FXAA
 	)
 	# Type of MSAA used
-	settings.set_value("display", "msaa", _window.msaa_3d)
+	settings.set_value("display", "msaa", _window.msaa_2d)
 	# FPS limit
 	settings.set_value("display", "fps", Engine.max_fps)
 	# SFX volume
@@ -254,7 +254,7 @@ func _update_ui() -> void:
 				_window.screen_space_aa == Viewport.SCREEN_SPACE_AA_FXAA
 		)
 		# Type of MSAA used
-		_msaa.selected = _window.msaa_3d
+		_msaa.selected = _window.msaa_2d
 		# FPS limit
 		for fps_index: int in range(_fps.item_count):
 			if _fps.get_item_text(fps_index) == str(Engine.max_fps):
