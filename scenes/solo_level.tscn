@@ -1,15 +1,15 @@
 [gd_scene load_steps=14 format=3 uid="uid://bbnk0strplsql"]
 
-[ext_resource type="Script" path="res://scripts/level.gd" id="1_qp3jm"]
+[ext_resource type="Script" uid="uid://bvdj5ffrr4mtg" path="res://scripts/level.gd" id="1_qp3jm"]
 [ext_resource type="PackedScene" uid="uid://duuxnkk2m4afr" path="res://scenes/pipe.tscn" id="2_fmd4i"]
 [ext_resource type="PackedScene" uid="uid://bj34n2q7jwf6d" path="res://scenes/player.tscn" id="3_ipcns"]
 [ext_resource type="AudioStream" uid="uid://cjuvsiau56soy" path="res://audio/sounds/jump.wav" id="4_cbnj4"]
-[ext_resource type="Script" path="res://scripts/character_audio_player.gd" id="5_gm2m7"]
+[ext_resource type="Script" uid="uid://c60ky00h2apg1" path="res://scripts/character_audio_player.gd" id="5_gm2m7"]
 [ext_resource type="PackedScene" uid="uid://beovkyl6fn7dd" path="res://scenes/air_bounce.tscn" id="6_50hjp"]
 [ext_resource type="PackedScene" uid="uid://c3o1j4v8xyswq" path="res://scenes/options_menu.tscn" id="7_jmc1v"]
 [ext_resource type="Texture2D" uid="uid://bedkwh4mouh55" path="res://textures/cloud.png" id="7_mk0k8"]
 [ext_resource type="Texture2D" uid="uid://d1645otvyq65r" path="res://textures/ui/pause-button.svg" id="8_0v15n"]
-[ext_resource type="Script" path="res://scripts/debug_label.gd" id="8_0xk15"]
+[ext_resource type="Script" uid="uid://brtapcpdapecn" path="res://scripts/debug_label.gd" id="8_0xk15"]
 
 [sub_resource type="Animation" id="Animation_oniqx"]
 length = 0.001
@@ -68,8 +68,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_27egv"]
 _data = {
-"RESET": SubResource("Animation_oniqx"),
-"new_high_score": SubResource("Animation_euh0a")
+&"RESET": SubResource("Animation_oniqx"),
+&"new_high_score": SubResource("Animation_euh0a")
 }
 
 [node name="SoloLevel" type="Node"]
@@ -87,13 +87,20 @@ one_shot = true
 [node name="Player" parent="." instance=ExtResource("3_ipcns")]
 position = Vector2(32, 32)
 
-[node name="ScoreTextLabel" type="Label" parent="."]
+[node name="Scores" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScoreTextLabel" type="Label" parent="Scores"]
 z_index = 10
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
+offset_left = 120.0
+offset_right = 160.0
 offset_bottom = 23.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -103,7 +110,7 @@ text = "Score"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="ScoreNumberLabel" type="Label" parent="ScoreTextLabel"]
+[node name="ScoreNumberLabel" type="Label" parent="Scores/ScoreTextLabel"]
 unique_name_in_owner = true
 z_index = 10
 layout_mode = 1
@@ -122,16 +129,18 @@ text = "0
 "
 horizontal_alignment = 1
 
-[node name="HiScoreTextLabel" type="Label" parent="."]
+[node name="HiScoreTextLabel" type="Label" parent="Scores"]
 z_index = 10
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
+offset_left = 113.0
+offset_top = 117.0
+offset_right = 167.0
+offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -142,7 +151,7 @@ horizontal_alignment = 1
 vertical_alignment = 2
 uppercase = true
 
-[node name="HiScoreNumberLabel" type="Label" parent="HiScoreTextLabel"]
+[node name="HiScoreNumberLabel" type="Label" parent="Scores/HiScoreTextLabel"]
 unique_name_in_owner = true
 z_index = 10
 layout_mode = 1
@@ -185,11 +194,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.501961)
 
-[node name="OptionsMenu" parent="PauseScreen" instance=ExtResource("7_jmc1v")]
-visible = false
-layout_mode = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="PauseScreen"]
+[node name="PauseMenu" type="CenterContainer" parent="PauseScreen"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -197,29 +203,34 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen/PauseMenu"]
 layout_mode = 2
 
-[node name="PauseLabel" type="Label" parent="PauseScreen/CenterContainer/VBoxContainer"]
+[node name="PauseLabel" type="Label" parent="PauseScreen/PauseMenu/VBoxContainer"]
 layout_mode = 2
 text = "PAUSED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainMenuButton" type="Button" parent="PauseScreen/CenterContainer/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="PauseScreen/PauseMenu/VBoxContainer"]
 process_mode = 2
 layout_mode = 2
 text = "MAIN MENU"
 
-[node name="OptionsButton" type="Button" parent="PauseScreen/CenterContainer/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="PauseScreen/PauseMenu/VBoxContainer"]
 process_mode = 2
 layout_mode = 2
 text = "OPTIONS"
 
-[node name="ExitButton" type="Button" parent="PauseScreen/CenterContainer/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="PauseScreen/PauseMenu/VBoxContainer"]
 process_mode = 2
 layout_mode = 2
 text = "EXIT"
+
+[node name="OptionsMenu" parent="PauseScreen" instance=ExtResource("7_jmc1v")]
+process_mode = 2
+visible = false
+layout_mode = 1
 
 [node name="PauseButton" type="Button" parent="."]
 process_mode = 3
@@ -227,8 +238,8 @@ z_index = 10
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -26.0
-offset_right = 494.0
+offset_left = -27.0
+offset_right = 505.0
 offset_bottom = 520.0
 grow_horizontal = 0
 scale = Vector2(0.05, 0.05)
@@ -274,7 +285,7 @@ text = "NEW HIGH SCORE!!!"
 unique_name_in_owner = true
 process_mode = 2
 libraries = {
-"": SubResource("AnimationLibrary_27egv")
+&"": SubResource("AnimationLibrary_27egv")
 }
 
 [node name="DebugLabel" type="RichTextLabel" parent="."]
@@ -302,7 +313,9 @@ script = ExtResource("8_0xk15")
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="jumped" from="Player" to="." method="_on_player_jumped"]
 [connection signal="got_new_high_score" from="CharacterAudioPlayer" to="." method="_on_new_high_score"]
-[connection signal="pressed" from="PauseScreen/CenterContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="PauseScreen/CenterContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="PauseScreen/CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="PauseScreen/PauseMenu/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="PauseScreen/PauseMenu/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="PauseScreen/PauseMenu/VBoxContainer/OptionsButton" to="PauseScreen/OptionsMenu" method="_load_settings"]
+[connection signal="pressed" from="PauseScreen/PauseMenu/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="back_button_pressed" from="PauseScreen/OptionsMenu" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]

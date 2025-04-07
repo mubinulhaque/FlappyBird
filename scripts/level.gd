@@ -20,18 +20,20 @@ var _new_pipe_wait_time := 1.0 ## Time between pipes being generated
 var _pipe_speed: float = _INITIAL_PIPE_SPEED ## Initial speed at which pipes move
 var _player_alive := true ## If the player is alive
 
-@onready var _pipes: Array[Pipe]
-@onready var _pipe_creation_timer: Timer = $PipeCreationTimer
-@onready var _score_label: Label = %ScoreNumberLabel
-@onready var _audio_player: CharacterAudioPlayer = $CharacterAudioPlayer
 @onready var _air_bounces: Array[AirBounce] = [$AirBounce, $AirBounce2]
-@onready var _high_score_label: Label = %HiScoreNumberLabel
-@onready var _level_restart_timer: Timer = $LevelRestartTimer
-@onready var _pause_button: Button = $PauseButton
-@onready var _pause_screen: ColorRect = $PauseScreen
+@onready var _audio_player: CharacterAudioPlayer = $CharacterAudioPlayer
 @onready var _background: ParallaxBackground = $ParallaxBackground
 @onready var _high_score_animator: AnimationPlayer = %HighScoreAnimator
+@onready var _high_score_label: Label = %HiScoreNumberLabel
+@onready var _level_restart_timer: Timer = $LevelRestartTimer
 @onready var _options_menu: Control = $PauseScreen/OptionsMenu
+@onready var _pause_button: Button = $PauseButton
+@onready var _pause_menu: CenterContainer = %PauseMenu
+@onready var _pause_screen: ColorRect = $PauseScreen
+@onready var _pipe_creation_timer: Timer = $PipeCreationTimer
+@onready var _pipes: Array[Pipe]
+@onready var _score_label: Label = %ScoreNumberLabel
+@onready var _scores: Control = $Scores
 
 
 func _ready() -> void:
@@ -82,7 +84,116 @@ func _input(event: InputEvent) -> void:
 		_on_pause_button_pressed()
 
 
-# Spawns a pipe at a specific height
+func _get_random_pipe_height() -> int:
+	@warning_ignore("integer_division")
+	return (randi() % _max_pipe_height) + (_PIPE_GAP / 2)
+
+
+## Move a specified pipe
+func _move_pipe(height: int, old_pipe: Pipe) -> void:
+	pass
+	if _pipes.size() >= _max_pipe_count:
+		# If there are enough pipes already
+		old_pipe.change_height(height)
+		old_pipe.position.x = _pipe_spawn
+	else:
+		printerr("Not enough pipes!")
+
+
+## Spawns a pipe after a set amount of time
+func _on_pipe_creation_timer_timeout() -> void:
+	_spawn_pipe(_get_random_pipe_height())
+	
+	_pipe_creation_timer.wait_time = _new_pipe_wait_time
+
+
+## Moves an offscreen pipe to the left
+func _on_pipe_not_visible(old_pipe: Pipe) -> void:
+	_offscreen_pipe = old_pipe
+
+
+## Increments a player's score
+func _on_player_entered_gap(player: Player) -> void:
+	_current_score = player.increment_score()
+	_score_label.text = str(_current_score)
+	
+	if _current_score % 20 == 0:
+		_pipe_speed *= 1.05
+		print("Increasing speed to ", _pipe_speed, "!")
+
+
+## Kills a player when they hit a pipe
+func _on_player_entered_pipe(body: Node2D) -> void:
+	if body is Player:
+		var player: Player = body
+		player.die()
+
+
+## Plays a jump sound
+func _on_player_jumped(player_position: Vector2) -> void:
+	_audio_player.play_sound(_audio_player.JUMP_SOUND)
+	
+	var new_bounce := _air_bounces[_current_bounce]
+	new_bounce.play(player_position)
+	_current_bounce = (_current_bounce + 1) % _air_bounces.size()
+
+
+## Quits the game
+func _on_exit_button_pressed() -> void:
+	get_tree().paused = false
+	get_tree().quit()
+
+
+## Restarts the level and unpauses the game
+func _on_level_restart_timer_timeout() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+
+
+## Switches to the Main Menu
+func _on_main_menu_button_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+
+## Plays the New High Score animation
+func _on_new_high_score() -> void:
+	_high_score_animator.play("new_high_score")
+
+
+## Displays the options menu
+func _on_options_button_pressed() -> void:
+	print("Toggle")
+	_options_menu.visible = !_options_menu.visible
+	_pause_menu.visible = !_pause_menu.visible
+	_scores.visible = !_scores.visible
+
+
+## Changes the pause button icon and pauses the game
+func _on_pause_button_pressed() -> void:
+	if _player_alive:
+		get_tree().paused = !get_tree().paused
+		_pause_screen.visible = get_tree().paused
+		
+		if get_tree().paused:
+			_pause_button.icon = _PLAY_ICON
+		else:
+			_pause_button.icon = _PAUSE_ICON
+
+
+## Plays a death sound and, if necessary, saves the player's new high score
+func _on_player_died() -> void:
+	_player_alive = false
+	_audio_player.play_sound(_audio_player.DEATH_SOUND)
+	
+	if _current_score > _current_high_score:
+		SaveManager.save_high_score(_current_profile, _current_score)
+		_audio_player.play_sound(_audio_player.CLAP_SOUND)
+	
+	_level_restart_timer.start()
+
+
+## Spawns a pipe at a specific height
 func _spawn_pipe(height: int) -> void:
 	if _pipes.size() < _max_pipe_count:
 		# If there aren't enough pipes already
@@ -112,103 +223,3 @@ func _spawn_pipe(height: int) -> void:
 		# If there are enough pipes already
 		# Move an offscreen to the right of the screen
 		_move_pipe(_get_random_pipe_height(), _offscreen_pipe)
-
-
-# Move a specified pipe
-func _move_pipe(height: int, old_pipe: Pipe) -> void:
-	pass
-	if _pipes.size() >= _max_pipe_count:
-		# If there are enough pipes already
-		old_pipe.change_height(height)
-		old_pipe.position.x = _pipe_spawn
-	else:
-		printerr("Not enough pipes!")
-
-
-func _get_random_pipe_height() -> int:
-	@warning_ignore("integer_division")
-	return (randi() % _max_pipe_height) + (_PIPE_GAP / 2)
-
-
-# Moves an offscreen pipe to the left
-func _on_pipe_not_visible(old_pipe: Pipe) -> void:
-	_offscreen_pipe = old_pipe
-
-
-# Spawns a pipe after a set amount of time
-func _on_pipe_creation_timer_timeout() -> void:
-	_spawn_pipe(_get_random_pipe_height())
-	
-	_pipe_creation_timer.wait_time = _new_pipe_wait_time
-
-
-# Kills a player when they hit a pipe
-func _on_player_entered_pipe(body: Node2D) -> void:
-	if body is Player:
-		var player: Player = body
-		player.die()
-
-
-# Increments a player's score
-func _on_player_entered_gap(player: Player) -> void:
-	_current_score = player.increment_score()
-	_score_label.text = str(_current_score)
-	
-	if _current_score % 20 == 0:
-		_pipe_speed *= 1.05
-		print("Increasing speed to ", _pipe_speed, "!")
-
-
-# Plays a jump sound
-func _on_player_jumped(player_position: Vector2) -> void:
-	_audio_player.play_sound(_audio_player.JUMP_SOUND)
-	
-	var new_bounce := _air_bounces[_current_bounce]
-	new_bounce.play(player_position)
-	_current_bounce = (_current_bounce + 1) % _air_bounces.size()
-
-
-# Plays a death sound and, if necessary, saves the player's new high score
-func _on_player_died() -> void:
-	_player_alive = false
-	_audio_player.play_sound(_audio_player.DEATH_SOUND)
-	
-	if _current_score > _current_high_score:
-		SaveManager.save_high_score(_current_profile, _current_score)
-		_audio_player.play_sound(_audio_player.CLAP_SOUND)
-	
-	_level_restart_timer.start()
-
-
-func _on_level_restart_timer_timeout() -> void:
-	get_tree().paused = false
-	get_tree().reload_current_scene()
-
-
-func _on_pause_button_pressed() -> void:
-	if _player_alive:
-		get_tree().paused = !get_tree().paused
-		_pause_screen.visible = get_tree().paused
-		
-		if get_tree().paused:
-			_pause_button.icon = _PLAY_ICON
-		else:
-			_pause_button.icon = _PAUSE_ICON
-
-
-func _on_main_menu_button_pressed() -> void:
-	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
-
-
-func _on_exit_button_pressed() -> void:
-	get_tree().paused = false
-	get_tree().quit()
-
-
-func _on_new_high_score() -> void:
-	_high_score_animator.play("new_high_score")
-
-
-func _on_options_button_pressed() -> void:
-	_options_menu.visible = !_options_menu.visible
