@@ -17,6 +17,20 @@ var _settings_loaded := false ## Has the settings been loaded yet?
 @onready var _windowed: OptionButton = %WindowedOptions
 
 
+func _ready() -> void:
+	_enable_popup_nearest_filtering(_monitors)
+	_enable_popup_nearest_filtering(_msaa)
+	_enable_popup_nearest_filtering(_resolutions)
+	_enable_popup_nearest_filtering(_windowed)
+
+
+## Enables nearest texture filtering on Popup Menu items
+func _enable_popup_nearest_filtering(button: OptionButton) -> void:
+	if button.get_child(0, true) is PopupMenu:
+		var popup: PopupMenu = button.get_child(0, true)
+		popup.canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
+
+
 func _load_settings() -> void:
 	if not _settings_loaded:
 		# If the settings haven't been loaded yet

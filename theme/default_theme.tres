@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://6ab2ite7014b"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://6ab2ite7014b"]
 
 [ext_resource type="StyleBox" uid="uid://cm75yqroua63n" path="res://theme/black_pipe_9slice.tres" id="2_0ref1"]
 [ext_resource type="StyleBox" uid="uid://wkwiso5i6amx" path="res://theme/green_pipe_9slice.tres" id="2_xul1n"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://r1yssr8k1k1t" path="res://textures/ui/tick.png" id="5_4tj8r"]
 [ext_resource type="Texture2D" uid="uid://un17euqpahh3" path="res://textures/ui/grabber.png" id="5_dwelr"]
 [ext_resource type="Texture2D" uid="uid://c21eq7772t6q4" path="res://textures/ui/grabber_highlight.png" id="6_eev3d"]
+[ext_resource type="Texture2D" uid="uid://b0umk113kt2m8" path="res://textures/ui/radio_unchecked.png" id="9_4vke1"]
+[ext_resource type="Texture2D" uid="uid://b6841uf2mv37j" path="res://textures/ui/radio_checked.png" id="9_obgof"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4vke1"]
 
@@ -37,3 +39,8 @@ MarginContainer/constants/margin_right = 10
 MarginContainer/constants/margin_top = 10
 OptionButton/constants/arrow_margin = 10
 OptionButton/icons/arrow = ExtResource("3_xul1n")
+PopupMenu/constants/item_start_padding = 10
+PopupMenu/icons/radio_checked = ExtResource("9_obgof")
+PopupMenu/icons/radio_unchecked = ExtResource("9_4vke1")
+PopupMenu/styles/hover = ExtResource("2_0ref1")
+PopupMenu/styles/panel = ExtResource("2_0ref1")
