@@ -15,4 +15,5 @@ MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10
 MarginContainer/constants/margin_top = 10
+OptionButton/constants/arrow_margin = 10
 OptionButton/icons/arrow = ExtResource("3_xul1n")
