@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bc403ub83m53o"]
+[gd_scene load_steps=3 format=3 uid="uid://bc403ub83m53o"]
 
 [ext_resource type="Script" uid="uid://dqh6iilcgr466" path="res://scripts/main_menu.gd" id="1_3n0m8"]
 [ext_resource type="PackedScene" uid="uid://c3o1j4v8xyswq" path="res://scenes/options_menu.tscn" id="2_5ps2a"]
-[ext_resource type="Texture2D" uid="uid://c7cupffibwqax" path="res://textures/ui/singleplayer.png" id="2_714fg"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -49,76 +48,23 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="PlayButton" type="Button" parent="DefaultMenu/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(96, 24)
 layout_mode = 2
 text = "PLAY"
 
 [node name="OptionsButton" type="Button" parent="DefaultMenu/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(96, 24)
 layout_mode = 2
 text = "OPTIONS"
 
 [node name="ExitButton" type="Button" parent="DefaultMenu/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(96, 24)
 layout_mode = 2
 text = "EXIT"
 
 [node name="OptionsMenu" parent="." instance=ExtResource("2_5ps2a")]
 visible = false
 layout_mode = 1
-
-[node name="PlayMenu" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Title" type="Label" parent="PlayMenu"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -98.0
-offset_right = 98.0
-offset_bottom = 45.0
-grow_horizontal = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 24
-text = "GAME MODE"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="PlayMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -160.0
-offset_top = -54.0
-offset_right = 160.0
-offset_bottom = 54.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayMenu/CenterContainer"]
-layout_mode = 2
-
-[node name="SoloGame" type="Button" parent="PlayMenu/CenterContainer/HBoxContainer"]
-layout_mode = 2
-icon = ExtResource("2_714fg")
-
-[node name="BackButton" type="Button" parent="PlayMenu"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -31.0
-offset_right = 50.0
-grow_vertical = 0
-text = "BACK"
 
 [node name="SoloProfileMenu" type="Control" parent="."]
 visible = false
@@ -282,8 +228,6 @@ text = "CREATE"
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/OptionsButton" to="OptionsMenu" method="_load_settings"]
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="back_button_pressed" from="OptionsMenu" to="." method="_on_options_menu_back_button_pressed"]
-[connection signal="pressed" from="PlayMenu/CenterContainer/HBoxContainer/SoloGame" to="." method="_on_solo_game_pressed"]
-[connection signal="pressed" from="PlayMenu/BackButton" to="." method="_on_play_menu_back_button_pressed"]
 [connection signal="pressed" from="SoloProfileMenu/BackButton" to="." method="_on_solo_profile_back_button_pressed"]
 [connection signal="pressed" from="SoloProfileMenu/CreateButton" to="." method="_on_create_profile_button_pressed" binds= ["SOLO"]]
 [connection signal="pressed" from="SoloProfileMenu/PlayButton" to="." method="_on_solo_game_play_button_pressed"]

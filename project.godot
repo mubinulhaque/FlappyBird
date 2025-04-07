@@ -36,6 +36,7 @@ window/stretch/aspect="expand"
 
 theme/custom="uid://6ab2ite7014b"
 theme/custom_font="res://kenney_pixel_square.ttf"
+theme/default_font_subpixel_positioning=0
 
 [input]
 
