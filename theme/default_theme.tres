@@ -15,6 +15,7 @@ Button/styles/normal = ExtResource("2_xul1n")
 Button/styles/pressed = ExtResource("2_xul1n")
 CheckButton/icons/checked = ExtResource("3_il5tp")
 CheckButton/icons/unchecked = ExtResource("3_ehq15")
+CheckButton/styles/hover_pressed = ExtResource("2_0ref1")
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10
