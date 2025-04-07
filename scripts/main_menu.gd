@@ -1,6 +1,8 @@
 ## Class used for the main menu
 extends Control
 
+signal settings_load_requested ## Emitted when settings should be loaded
+
 const _SOLO_GAME := preload("res://scenes/solo_level.tscn")
 const _BIRD_TEXTURE := preload("res://textures/bird.png")
 
@@ -16,6 +18,10 @@ var _from_which_menu := _solo_profile_menu ## Used for returning from the Create
 @onready var _solo_profile_selector: OptionButton = %ProfileSelector
 @onready var _profile_name_edit: LineEdit = %NameEdit
 @onready var _solo_play_button: Button = $SoloProfileMenu/PlayButton
+
+
+func _ready() -> void:
+	settings_load_requested.emit()
 
 
 ## Creates a new profile using the Profile Name Edit
