@@ -59,6 +59,7 @@ columns = 2
 
 [node name="MonitorLabel" type="Label" parent="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "MONITOR"
 uppercase = true
 
@@ -68,6 +69,7 @@ layout_mode = 2
 
 [node name="WindowedLabel" type="Label" parent="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "WINDOW MODE"
 uppercase = true
 
@@ -85,6 +87,7 @@ popup/item_2/id = 2
 
 [node name="ResolutionLabel" type="Label" parent="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Resolution"
 uppercase = true
 
@@ -118,6 +121,7 @@ popup/item_10/id = 10
 
 [node name="FxaaLabel" type="Label" parent="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "FXAA"
 uppercase = true
 
@@ -127,6 +131,7 @@ layout_mode = 2
 
 [node name="MsaaLabel" type="Label" parent="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "MSAA"
 uppercase = true
 
@@ -146,6 +151,7 @@ popup/item_3/id = 3
 
 [node name="FpsLabel" type="Label" parent="CenterContainer/TabContainer/Display/ScrollContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "FPS Limit"
 uppercase = true
 
@@ -178,6 +184,7 @@ columns = 2
 
 [node name="SFXLabel" type="Label" parent="CenterContainer/TabContainer/Sound/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "SFX"
 horizontal_alignment = 1
 vertical_alignment = 1
