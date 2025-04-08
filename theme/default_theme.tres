@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://6ab2ite7014b"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://6ab2ite7014b"]
 
 [ext_resource type="StyleBox" uid="uid://cm75yqroua63n" path="res://theme/black_pipe_9slice.tres" id="2_0ref1"]
 [ext_resource type="StyleBox" uid="uid://wkwiso5i6amx" path="res://theme/green_pipe_9slice.tres" id="2_xul1n"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://c21eq7772t6q4" path="res://textures/ui/grabber_highlight.png" id="6_eev3d"]
 [ext_resource type="Texture2D" uid="uid://b0umk113kt2m8" path="res://textures/ui/radio_unchecked.png" id="9_4vke1"]
 [ext_resource type="Texture2D" uid="uid://b6841uf2mv37j" path="res://textures/ui/radio_checked.png" id="9_obgof"]
+[ext_resource type="StyleBox" uid="uid://bfc8c8yb631wc" path="res://theme/v_green_pipe_9slice.tres" id="11_0finn"]
+[ext_resource type="StyleBox" uid="uid://1u56l6fhdlyw" path="res://theme/v_black_pipe_9slice.tres" id="12_o3w03"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4vke1"]
 
@@ -51,3 +53,7 @@ TabContainer/styles/panel = ExtResource("2_xul1n")
 TabContainer/styles/tab_hovered = ExtResource("2_xul1n")
 TabContainer/styles/tab_selected = ExtResource("2_xul1n")
 TabContainer/styles/tab_unselected = ExtResource("2_0ref1")
+VScrollBar/styles/grabber = ExtResource("11_0finn")
+VScrollBar/styles/grabber_highlight = ExtResource("12_o3w03")
+VScrollBar/styles/grabber_pressed = ExtResource("12_o3w03")
+VScrollBar/styles/scroll = ExtResource("11_0finn")
