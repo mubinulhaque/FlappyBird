@@ -3,8 +3,8 @@ extends Node
 
 const _INITIAL_PIPE_SPEED := 100 ## Speed at which pipes move
 const _PIPE_GAP := 96 ## Height of the gap between vertically adjacent pipes
-const _PLAY_ICON := preload("res://textures/ui/play-button.svg")
-const _PAUSE_ICON := preload("res://textures/ui/pause-button.svg")
+const _PLAY_ICON := preload("res://textures/ui/play.png")
+const _PAUSE_ICON := preload("res://textures/ui/pause.png")
 
 @export var pipe_scene: PackedScene
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gdphvjgpcia0"
-path="res://.godot/imported/play-button.svg-70ebb96e1db8a64aae207b5d952b9537.ctex"
+uid="uid://crb4p45bi5i71"
+path="res://.godot/imported/pause.png-b730d646f6c93920a17aa6abe0535a53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/ui/play-button.svg"
-dest_files=["res://.godot/imported/play-button.svg-70ebb96e1db8a64aae207b5d952b9537.ctex"]
+source_file="res://textures/ui/pause.png"
+dest_files=["res://.godot/imported/pause.png-b730d646f6c93920a17aa6abe0535a53.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

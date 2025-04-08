@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://beovkyl6fn7dd" path="res://scenes/air_bounce.tscn" id="6_50hjp"]
 [ext_resource type="PackedScene" uid="uid://c3o1j4v8xyswq" path="res://scenes/options_menu.tscn" id="7_jmc1v"]
 [ext_resource type="Texture2D" uid="uid://bedkwh4mouh55" path="res://textures/cloud.png" id="7_mk0k8"]
-[ext_resource type="Texture2D" uid="uid://d1645otvyq65r" path="res://textures/ui/pause-button.svg" id="8_0v15n"]
 [ext_resource type="Script" uid="uid://brtapcpdapecn" path="res://scripts/debug_label.gd" id="8_0xk15"]
+[ext_resource type="Texture2D" uid="uid://crb4p45bi5i71" path="res://textures/ui/pause.png" id="8_rmw1u"]
 
 [sub_resource type="Animation" id="Animation_oniqx"]
 length = 0.001
@@ -238,13 +238,12 @@ z_index = 10
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -27.0
-offset_right = 505.0
-offset_bottom = 520.0
+offset_left = -36.0
+offset_bottom = 24.0
 grow_horizontal = 0
-scale = Vector2(0.05, 0.05)
 focus_mode = 0
-icon = ExtResource("8_0v15n")
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+icon = ExtResource("8_rmw1u")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
