@@ -107,6 +107,7 @@ layout_mode = 2
 
 [node name="ProfileSelector" type="OptionButton" parent="SoloProfileMenu/CenterContainer/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
 [node name="BackButton" type="Button" parent="SoloProfileMenu"]
@@ -223,6 +224,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "CREATE"
 
+[connection signal="profile_selector_loaded" from="." to="OptionsMenu" method="_enable_popup_nearest_filtering"]
 [connection signal="settings_load_requested" from="." to="OptionsMenu" method="_load_settings"]
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]

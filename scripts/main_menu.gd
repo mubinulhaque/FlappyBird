@@ -1,6 +1,7 @@
 ## Class used for the main menu
 extends Control
 
+signal profile_selector_loaded(button: OptionButton) ## Emitted to fix the Profile Selector's blurriness
 signal settings_load_requested ## Emitted when settings should be loaded
 
 const _SOLO_GAME := preload("res://scenes/solo_level.tscn")
@@ -21,6 +22,7 @@ var _from_which_menu := _solo_profile_menu ## Used for returning from the Create
 
 
 func _ready() -> void:
+	profile_selector_loaded.emit(_solo_profile_selector)
 	settings_load_requested.emit()
 
 
