@@ -17,14 +17,16 @@ var _from_which_menu := _solo_profile_menu ## Used for returning from the Create
 @onready var _options_menu: Control = $OptionsMenu
 @onready var _solo_profile_menu: Control = $SoloProfileMenu
 
-@onready var _solo_profile_selector: OptionButton = %ProfileSelector
 @onready var _profile_name_edit: LineEdit = %NameEdit
 @onready var _solo_play_button: Button = $SoloProfileMenu/PlayButton
+@onready var _solo_profile_selector: OptionButton = %ProfileSelector
+@onready var _version_label: Label = %VersionLabel
 
 
 func _ready() -> void:
 	profile_selector_loaded.emit(_solo_profile_selector)
 	settings_load_requested.emit()
+	_version_label.text = ProjectSettings.get_setting("application/config/version")
 
 
 ## Creates a new profile using the Profile Name Edit
