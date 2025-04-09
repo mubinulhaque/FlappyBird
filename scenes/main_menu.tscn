@@ -57,6 +57,10 @@ custom_minimum_size = Vector2(96, 24)
 layout_mode = 2
 text = "OPTIONS"
 
+[node name="CreditsButton" type="Button" parent="DefaultMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "CREDITS"
+
 [node name="ExitButton" type="Button" parent="DefaultMenu/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(96, 24)
 layout_mode = 2
@@ -65,6 +69,59 @@ text = "EXIT"
 [node name="OptionsMenu" parent="." instance=ExtResource("2_5ps2a")]
 visible = false
 layout_mode = 1
+
+[node name="CreditsMenu" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="CreditsMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 12.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 24
+text = "CREDITS"
+
+[node name="CenterContainer" type="CenterContainer" parent="CreditsMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CreditsMenu/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "Original game by Dong Nguyen
+Godot Engine by Godot Engine Contributors
+(https://godotengine.org/license/)
+Clouds by dustdfg
+(https://dustdfg.itch.io/)
+Clapping by qubodup
+(https://opengameart.org/users/qubodup)"
+
+[node name="BackButton" type="Button" parent="CreditsMenu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 44.0
+grow_vertical = 0
+text = "BACK"
 
 [node name="SoloProfileMenu" type="Control" parent="."]
 visible = false
@@ -228,8 +285,10 @@ text = "CREATE"
 [connection signal="settings_load_requested" from="." to="OptionsMenu" method="_load_settings"]
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="DefaultMenu/CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="back_button_pressed" from="OptionsMenu" to="." method="_on_options_menu_back_button_pressed"]
+[connection signal="pressed" from="CreditsMenu/BackButton" to="." method="_on_credits_menu_back_button_pressed"]
 [connection signal="pressed" from="SoloProfileMenu/BackButton" to="." method="_on_solo_profile_back_button_pressed"]
 [connection signal="pressed" from="SoloProfileMenu/CreateButton" to="." method="_on_create_profile_button_pressed" binds= ["SOLO"]]
 [connection signal="pressed" from="SoloProfileMenu/PlayButton" to="." method="_on_solo_game_play_button_pressed"]

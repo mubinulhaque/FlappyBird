@@ -11,10 +11,11 @@ var _profiles := []
 var _from_which_menu := _solo_profile_menu ## Used for returning from the Create Profile menu
 
 # Menus
-@onready var _default_menu: Control = $DefaultMenu
-@onready var _solo_profile_menu: Control = $SoloProfileMenu
 @onready var _create_profile_menu: Control = $CreateProfileMenu
+@onready var _credits_menu: Control = $CreditsMenu
+@onready var _default_menu: Control = $DefaultMenu
 @onready var _options_menu: Control = $OptionsMenu
+@onready var _solo_profile_menu: Control = $SoloProfileMenu
 
 @onready var _solo_profile_selector: OptionButton = %ProfileSelector
 @onready var _profile_name_edit: LineEdit = %NameEdit
@@ -48,6 +49,14 @@ func _on_create_profile_button_pressed(mode: String) -> void:
 		_:
 			printerr("Not a valid menu, returning to main menu!")
 			_switch_menu(_solo_profile_menu, _default_menu)
+
+
+func _on_credits_menu_back_button_pressed() -> void:
+	_switch_menu(_credits_menu, _default_menu)
+
+
+func _on_credits_button_pressed() -> void:
+	_switch_menu(_default_menu, _credits_menu)
 
 
 func _on_exit_button_pressed() -> void:
