@@ -1,5 +1,5 @@
 # FlappyBird
-A Flappy Bird clone made in Godot 4.2
+A Flappy Bird clone made in Godot 4.4
 
 # Credits
 Original game by Dong Nguyen
